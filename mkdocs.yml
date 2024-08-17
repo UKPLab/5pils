@@ -1,0 +1,15 @@
+site_name: ukp_project_template
+nav:
+  - Home: index.md
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings:
+      project_name: ukp_project_template
+      handlers:
+        python:
+          options:
+            docstring_style: numpy

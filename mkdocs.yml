@@ -1,4 +1,4 @@
-site_name: ukp_project_template
+site_name: 5pils
 nav:
   - Home: index.md
 
@@ -8,7 +8,7 @@ theme:
 plugins:
   - search
   - mkdocstrings:
-      project_name: ukp_project_template
+      project_name: 5pils
       handlers:
         python:
           options:

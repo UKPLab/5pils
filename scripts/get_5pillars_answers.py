@@ -59,7 +59,10 @@ if __name__=='__main__':
     test = load_json('dataset/test.json')
     task_test = [t for t in test if t[args.task]!='not enough information']
     image_paths = [t['image path'] for t in task_test]
-    ground_truth = [t[args.task] for t in task_test]
+    if task=='date':
+        ground_truth = [t['date_numeric'] for t in task_test]
+    else:
+        ground_truth = [t[args.task] for t in task_test]
 
     #Load embeddings and evidence
     clip_evidence_embeddings = np.load('dataset/embeddings/evidence_embeddings.npy')
@@ -75,7 +78,6 @@ if __name__=='__main__':
     #Keep train images that have evidence
     images_with_evidence = [ev['image path'] for ev in evidence]
     demonstration_candidates = [t for t in train if t['image path'] in images_with_evidence]
-    # print(demonstration_candidates)
     demonstrations = []
     for i in range(len(image_paths)):
         if args.n_shots > 0:

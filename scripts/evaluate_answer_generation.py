@@ -36,21 +36,21 @@ if __name__=='__main__':
 
     for r in results:
         if args.task ==  'source':
-            scores = evaluate(r['output'], r['ground truth'], args.task)
+            scores = evaluate(r['output'], r['ground_truth'], args.task)
             rougeL.append(scores['rougeL'])
             meteor.append(scores['meteor'])
         elif args.task=='date':
-            scores = evaluate(r['output'], r['ground truth'], args.task, nlp)
+            scores = evaluate(r['output'], r['ground_truth'], args.task, nlp)
             exact_match.append(scores['exact_match'])
             delta.append(scores['delta'])
         elif args.task=='location':
 
             geonames_entries = set([d['query'] for d in load_json(args.geonames_data)])
-            NER_ground_truth = [e for e in extract_named_entities(r['ground truth'], nlp, 'locations')  if e in geonames_entries]
-            scores = evaluate(r['output'], r['ground truth'], args.task)
+            NER_ground_truth = [e for e in extract_named_entities(r['ground_truth'], nlp, 'locations')  if e in geonames_entries]
+            scores = evaluate(r['output'], r['ground_truth'], args.task)
             if len(NER_ground_truth) > 0:
                 #Compute the location delta metrics too because the ground truth has Geonames entries
-                NER_scores = evaluate(r['output'], r['ground truth'], 'location NER', nlp, args.geonames_data, args.geonames_username, args.sleep_geonames)
+                NER_scores = evaluate(r['output'], r['ground_truth'], 'location NER', nlp, args.geonames_data, args.geonames_username, args.sleep_geonames)
                 #codelta and hldelta is only reported for the subset with GeoNames entries
                 codelta.append(NER_scores['codelta'])
                 hldelta.append(NER_scores['hldelta'])
@@ -63,7 +63,7 @@ if __name__=='__main__':
             rougeL.append(scores['rougeL'])
             meteor.append(scores['meteor'])
         elif args.task ==  'motivation':
-            scores = evaluate(r['output'], r['ground truth'], args.task)
+            scores = evaluate(r['output'], r['ground_truth'], args.task)
             rougeL.append(scores['rougeL'])
             meteor.append(scores['meteor'])
             berts.append(scores['BertS'])

@@ -7,26 +7,26 @@ Each record contains the following items:
 
 **Main items**
 
-- `*URL*`: URL leading to the fact-checking article
-- *image path* : local path to the image
-- *publication date* : publication date of the fact-checking article
-- *was the photo used before?* : answer to the Provenance pillar
-- *source* : answer to the Source pillar
-- *date* : answer to the Date pillar
-- *date numeric label* : answer to the Date pillar in numeric format
-- *location* : answer to the Location pillar
-- *motivation* : answer to the Motivation pillar
+- `URL`: URL leading to the fact-checking article
+- `image path` : local path to the image
+- `publication date` : publication date of the fact-checking article
+- `was the photo used before?` : answer to the Provenance pillar
+- `source` : answer to the Source pillar
+- `date` : answer to the Date pillar
+- `date numeric label` : answer to the Date pillar in numeric format
+- `location` : answer to the Location pillar
+- `motivation` : answer to the Motivation pillar
 
 **Metadata**
 
 The following items are provided as metadata for analysis purpose
-- *org* : fact-checking organization from which the data was collected
-- *claim* : claim verified in the fact-checking article
-- *type of image* : the type of image claim being verified. True, Out-of-Context, Manipulated, Fake, or True
-- *verification strategy* : the list of strategies used by fact-checkers to verify the image
-- *verification tool* : the list of tools used by fact-checkers to verify the image
-- *claimed location* : the location of the image, according to the claim
-- *claimed date* : the date of the image, according to the claim
+- `org` : fact-checking organization from which the data was collected
+- `claim` : claim verified in the fact-checking article
+- `type of image` : the type of image claim being verified. True, Out-of-Context, Manipulated, Fake, or True
+- `verification strategy` : the list of strategies used by fact-checkers to verify the image
+- `verification tool` : the list of tools used by fact-checkers to verify the image
+- `claimed location` : the location of the image, according to the claim
+- `claimed date` : the date of the image, according to the claim
 
 
 ### Example
@@ -76,18 +76,18 @@ The script can be extended to cover additional fact-checking organizations. For 
 
 Parameters:
 
-- *url_domain*: The domain to query on the Wayback Machine API
-- *org*: Organization from which articles are collected
-- *file_path*: Path to the file that stores the URLs
-- *parser*: A parser function. Each fact-checking organization has a dedicated one. They are found in dataset_collection/scrape_utils.py. By default, we provide parsers for Factly, Pesacheck, and 211check. If you collect data from another organization, you will need to create your own parser and add it to dataset_collection/scrape_utils.py
-- *scrape_image*: If True, download the fact-checking images in addition to the article text
-- *process_image*: If True, process the images by cropping them to remove social media sidebars. This requires an instruction file that is, by default, only available for the 1,676 images of 5Pils
-- *image_processing_script*: Script with automated instructions to crop and clean the images. Needs to be a valid file with instructions if process_image is True. If you collect new data, you will need to update the instructions in the file.
-- *start_date*: Start date for the collection of URLs
-- *end_date*: End date for the collection of URLs
-- *max_count*: Maximum number of URLs to collect
-- *chunk_size*: Size of each chunk to query the Wayback Machine API. It is not recommended to set it higher than 5000
-- *sleep*: Waiting time between two calls of the Wayback machine API. It is recommended to use a sufficiently high value. By default, 5
+- `url_domain`: The domain to query on the Wayback Machine API
+- `org`: Organization from which articles are collected
+- `file_path`: Path to the file that stores the URLs
+- `parser`: A parser function. Each fact-checking organization has a dedicated one. They are found in dataset_collection/scrape_utils.py. By default, we provide parsers for Factly, Pesacheck, and 211check. If you collect data from another organization, you will need to create your own parser and add it to dataset_collection/scrape_utils.py
+- `scrape_image`: If True, download the fact-checking images in addition to the article text
+- `process_image`: If True, process the images by cropping them to remove social media sidebars. This requires an instruction file that is, by default, only available for the 1,676 images of 5Pils
+- `image_processing_script`: Script with automated instructions to crop and clean the images. Needs to be a valid file with instructions if process_image is True. If you collect new data, you will need to update the instructions in the file.
+- `start_date`: Start date for the collection of URLs
+- `end_date`: End date for the collection of URLs
+- `max_count`: Maximum number of URLs to collect
+- `chunk_size`: Size of each chunk to query the Wayback Machine API. It is not recommended to set it higher than 5000
+- `sleep`: Waiting time between two calls of the Wayback machine API. It is recommended to use a sufficiently high value. By default, 5
 
 ### Automated labeling
 The next step is to automatically extract the annotations from the FC articles using a LLM. Our code uses GPT4, but can be easily modified to leverage other LLMs. Using GPT4 requires an Azure account with access to the [Azure OpenAI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview). You will need to provide your API key and API endpoint as parameters.

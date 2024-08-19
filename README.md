@@ -9,8 +9,6 @@ Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de)
 
 [UKP Lab](https://www.ukp.tu-darmstadt.de/) | [TU Darmstadt](https://www.tu-darmstadt.de/)
 
-5Pils is also available on [TU Datalib](https://tudatalib.ulb.tu-darmstadt.de/).
-
 Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions. 
 
 ## Abstract 

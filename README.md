@@ -1,115 +1,165 @@
-<p  align="center">
-  <img src='logo.png' width='200'>
+# Image, Tell me your story! Predicting the original meta-context of visual misinformation
+
+[![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
+[![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+
+This repository contains the 5Pils dataset, introduced in the paper: "Image, Tell me your story!" Predicting the original meta-context of visual misinformation. It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is realeased under a **CC-BY-SA-4.0** license.
+
+Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de) 
+
+[UKP Lab](https://www.ukp.tu-darmstadt.de/) | [TU Darmstadt](https://www.tu-darmstadt.de/)
+
+5Pils is also available on [TU Datalib](https://tudatalib.ulb.tu-darmstadt.de/).
+
+Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions. 
+
+## Abstract 
+> To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human factchecking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with questionanswer pairs about their original meta-context. Annotations are based on the 5 Pillars factchecking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
+
+<p align="center">
+  <img width="70%" src="assets/introducory_example.png" alt="header" />
 </p>
 
-# 5pils
-[![Arxiv](https://img.shields.io/badge/Arxiv-YYMM.NNNNN-red?style=flat-square&logo=arxiv&logoColor=white)](https://put-here-your-paper.com)
-[![License](https://img.shields.io/github/license/UKPLab/5pils)](https://opensource.org/licenses/Apache-2.0)
-[![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
-[![CI](https://github.com/UKPLab/5pils/actions/workflows/main.yml/badge.svg)](https://github.com/UKPLab/5pils/actions/workflows/main.yml)
-
-This is the official template for new Python projects at UKP Lab. It was adapted for the needs of UKP Lab from the excellent [python-project-template](https://github.com/rochacbruno/python-project-template/) by [rochacbruno](https://github.com/rochacbruno).
-
-It should help you start your project and give you continuous status updates on the development through [GitHub Actions](https://docs.github.com/en/actions).
-
-> **Abstract:** The study of natural language processing (NLP) has gained increasing importance in recent years, with applications ranging from machine translation to sentiment analysis. Properly managing Python projects in this domain is of paramount importance to ensure reproducibility and facilitate collaboration. The template provides a structured starting point for projects and offers continuous status updates on development through GitHub Actions. Key features include a basic setup.py file for installation, packaging, and distribution, documentation structure using mkdocs, testing structure using pytest, code linting with pylint, and entry points for executing the program with basic CLI argument parsing. Additionally, the template incorporates continuous integration using GitHub Actions with jobs to check, lint, and test the project, ensuring robustness and reliability throughout the development process.
-
-Contact person: [Federico Tiblias](mailto:federico.tiblias@tu-darmstadt.de) 
-
-[UKP Lab](https://www.ukp.tu-darmstadt.de/) | [TU Darmstadt](https://www.tu-darmstadt.de/
-)
-
-Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions.
 
 
-## Getting Started
+## 5Pils dataset
 
-> **DO NOT CLONE OR FORK**
+The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework for image contextualization. The dataset annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
+More information about the dataset structure can be found in the README file of the dataset folder.
 
-If you want to set up this template:
+### ❕**Content warning** ❕
+> 5Pils contains examples of real-world misinformation.  Due to the real-world nature of the data, events covered include wars and conflicts. As a result, some images contain graphic, violent content. When collecting the data, we decided not to filter out images with violent content to cover the actual distribution of images that our target users, professional fact-checkers, would want to provide as input. Given
+the graphic nature of some images, we do not release them directly. Instead, we do publicly release the URLs of the FC articles, as well as the script that allows to collect and process the images.
 
-1. Request a repository on UKP Lab's GitHub by following the standard procedure on the wiki. It will install the template directly. Alternatively, set it up in your personal GitHub account by clicking **[Use this template](https://github.com/rochacbruno/python-project-template/generate)**.
-2. Wait until the first run of CI finishes. Github Actions will commit to your new repo with a "✅ Ready to clone and code" message.
-3. Delete optional files: 
-    - If you don't need automatic documentation generation, you can delete folder `docs`, file `.github\workflows\docs.yml` and `mkdocs.yml`
-    - If you don't want automatic testing, you can delete folder `tests` and file `.github\workflows\tests.yml`
-4. Prepare a virtual environment:
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install .
-pip install -r requirements-dev.txt # Only needed for development
-```
-5. Adapt anything else (for example this file) to your project. 
+### 5Pils example
 
-6. Read the file [ABOUT_THIS_TEMPLATE.md](ABOUT_THIS_TEMPLATE.md)  for more information about development.
+````json
+    {
+        "URL": "https://factly.in/2013-evacuation-image-from-typhoon-hit-philippines-is-passed-off-as-iaf-airlifting-800-people-from-kabul",
+        "image path": "dataset/processed_img/2013-evacuation-image-from-typhoon-hit-philippines-is-passed-off-as-iaf-airlifting-800-people-from-kabul.png",
+        "org": "factly",
+        "publication date": "2021-08-17T12:00:55+00:00",
+        "claim": "The image shows 800 people airlifted by the Indian Air Force from Kabul.",
+        "was the photo used before?": "yes",
+        "source": "US Airforce's official website",
+        "date": "2013",
+        "date numeric label": "['2013-01-14T00:00:00+00:00']",
+        "location": "Tacloban city, Philippines",
+        "motivation": "To document the US Airforce\u2019s operation Damayan evacuation in 2013",
+        "type of image": "out-of-context",
+        "verification strategy": "['reverse image search']",
+        "verification tool": "['Other/Unspecified']",
+        "claimed location": "Kabul, Afghanistan",
+        "claimed date": "2021"
+    }
 
-## Usage
+````
 
-### Using the classes
+## Getting started
 
-To import classes/methods of `5pils` from inside the package itself you can use relative imports: 
+### Environment
 
-```py
-from .base import BaseClass # Notice how I omit the package name
-
-BaseClass().something()
-```
-
-To import classes/methods from outside the package (e.g. when you want to use the package in some other project) you can instead refer to the package name:
-
-```py
-from 5pils import BaseClass # Notice how I omit the file name
-from 5pils.subpackage import SubPackageClass # Here it's necessary because it's a subpackage
-
-BaseClass().something()
-SubPackageClass().something()
-```
-
-### Using scripts
-
-This is how you can use `5pils` from command line:
-
-```bash
-$ python -m 5pils
-```
-
-### Expected results
-
-After running the experiments, you should expect the following results:
-
-(Feel free to describe your expected results here...)
-
-### Parameter description
-
-* `x, --xxxx`: This parameter does something nice
-
-* ...
-
-* `z, --zzzz`: This parameter does something even nicer
-
-## Development
-
-Read the FAQs in [ABOUT_THIS_TEMPLATE.md](ABOUT_THIS_TEMPLATE.md) to learn more about how this template works and where you should put your classes & methods. Make sure you've correctly installed `requirements-dev.txt` dependencies
-
-## Cite
-
-Please use the following citation:
+Follow these instructions to recreate thy python environment used for all our experiments. All experiments with Llava and Llama2 ran on A100 GPUs.
 
 ```
-@InProceedings{smith:20xx:CONFERENCE_TITLE,
-  author    = {Smith, John},
-  title     = {My Paper Title},
-  booktitle = {Proceedings of the 20XX Conference on XXXX},
-  month     = mmm,
-  year      = {20xx},
-  address   = {Gotham City, USA},
-  publisher = {Association for XXX},
-  pages     = {XXXX--XXXX},
-  url       = {http://xxxx.xxx}
-}
+$ conda create --name 5Pils python=3.9
+$ conda activate 5Pils
+$ pip install -r requirements.txt
+$ python -m spacy download en_core_web_lg
 ```
+
+### Google Vision API and Azure OpenAI service
+
+- Our baseline model relies on evidence retrieved with reverse image search using the [Google Vision API](https://cloud.google.com/vision/docs/detecting-web). All URLs for the text evidence that we used in our experiments are provided in this repo. However, should you want to collect your own evidence, you will need to create a Google Cloud account and create an API key, or use a different reverse image search service.
+
+- If you want to use GPT4(-Vision) for answer generation, you will need an Azure account with access to the [Azure OpenAI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview).
+
+
+## Usage - dataset
+
+
+
+To use the dataset, you need to collect the images based on the 1,676 FC article urls provided in dataset/url/article_urls.txt:
+
+```
+$ python scripts/build_dataset_from_url.py
+```
+
+## Usage - evaluation
+
+Evaluate the performance of a model on 5Pils, for a specific pillar. In this example, we conduct the evaluation for Date.
+
+```
+$ python scripts/evaluate_answer_generation.py --results_file output/results_date.json --task date
+```
+ 
+Evaluation of Location requires 🌍 [GeoNames](https://www.geonames.org/). You will need to create a (free) account and provide your account name as input.
+
+## Usage - baseline 
+
+<p align="center">
+  <img width="75%" src="assets/baseline.png" alt="header" />
+</p>
+
+### Collecting the evidence
+
+Collect the text evidence based on their URLS:
+
+```
+$ python scripts/collect_RIS_evidence.py --collect_google 0 --evidence_urls dataset/retrieval_results/evidence_urls.json 
+```
+
+Instead of using our evidence set, you can also collect your own by setting *collect_google* to 1. This will require to provide a Google Vision API key. 
+
+
+### Predict and collect the original of manipulated images
+
+Step 1 (Optional): Classify images as manipulated or not after fine-tuning a ViT model on the train set. This step is optional as the predictions for the test set are already provided in *dataset/manipulation_detection_test.json*
+
+```
+$ python scripts/get_manipulated_images.py
+```
+
+Step 2: Replace manipulated images by the earliest corresponding reverse image search result:
+
+```
+$ python scripts/get_originals_of_manipulated.py --download_image 1
+```
+
+###  Compute embeddings 
+
+Compute embeddings for evidence ranking and few-shot demonstration selection:
+
+```
+$ python scripts/get_embeddings.py
+```
+
+### Generate answers
+
+Generate answers for a specific pillar using a LLM or Multimodal LLM. In this example, we generate answers for Date with multimodal zero-shot Llava:
+
+```
+$ python scripts/get_5pillars_answers.py --results_file output/results_date.json --task date --modality multimodal --n_shots 0 --model llava
+```
+
+### Evaluate the evidence ranking
+
+Evaluate the quality of the evidence ranking:
+
+```
+$ python scripts/evaluation_ranking.py
+```
+
+## Citation
+
+If you use the 5Pils dataset or this code in your work, please cite our paper as follows:
+
+Citation is coming soon.
 
 ## Disclaimer
 
-> This repository contains experimental software and is published for the sole purpose of giving additional background details on the respective publication. 
+> This repository contains experimental software and is published for the sole purpose of giving additional background details on the respective publication.
+
+
+
+

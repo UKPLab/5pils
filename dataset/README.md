@@ -7,7 +7,7 @@ Each record contains the following items:
 
 **Main items**
 
-- *URL*: URL leading to the fact-checking article
+- `*URL*`: URL leading to the fact-checking article
 - *image path* : local path to the image
 - *publication date* : publication date of the fact-checking article
 - *was the photo used before?* : answer to the Provenance pillar

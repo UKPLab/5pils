@@ -130,7 +130,7 @@ def run_model(image_paths,
         if type(output)==str:
             data = {}
             data['img_path'] = image_paths[i]
-            data['ground truth'] = ground_truth[i]
+            data['ground_truth'] = ground_truth[i]
             data['output'] = output
             save_result(data,results_json)
             time.sleep(sleep)

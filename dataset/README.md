@@ -3,8 +3,6 @@
 The 5Pils dataset contains 1,676 fact-checked images annotated with their meta-context. The dataset is split in 3 json files containing  the train, val, and test sets.
 5Pils is made available under a **CC-BY-SA-4.0** license.
 
-5Pils is also available on [TU Datalib](https://tudatalib.ulb.tu-darmstadt.de/).
-
 Each record contains the following items: 
 
 **Main items**

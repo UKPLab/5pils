@@ -1,9 +1,10 @@
 # Image, Tell me your story! Predicting the original meta-context of visual misinformation
 
+[![Arxiv](https://img.shields.io/badge/Arxiv-YYMM.NNNNN-red?style=flat-square&logo=arxiv&logoColor=white)]([https://put-here-your-paper.com](https://arxiv.org/abs/2408.09939)
 [![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
 [![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 
-This repository contains the 5Pils dataset, introduced in the paper: "Image, Tell me your story!" Predicting the original meta-context of visual misinformation. It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is realeased under a **CC-BY-SA-4.0** license.
+This repository contains the 5Pils dataset, introduced in the paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://arxiv.org/abs/2408.09939). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is realeased under a **CC-BY-SA-4.0** license.
 
 Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de) 
 
@@ -152,7 +153,16 @@ $ python scripts/evaluation_ranking.py
 
 If you use the 5Pils dataset or this code in your work, please cite our paper as follows:
 
-Citation is coming soon.
+```
+@article{tonglet2024imagetellstorypredicting,
+      title={"Image, Tell me your story!" Predicting the original meta-context of visual misinformation}, 
+      author={Jonathan Tonglet and Marie-Francine Moens and Iryna Gurevych},
+      year={2024},
+      journal={arXiv preprint arXiv:2408.09939},
+      doi={https://doi.org/10.48550/arXiv.2408.09939},
+      url={https://arxiv.org/abs/2408.09939}, 
+}
+```
 
 ## Disclaimer
 

@@ -155,12 +155,12 @@ If you use the 5Pils dataset or this code in your work, please cite our paper as
 
 ```
 @article{tonglet2024imagetellstorypredicting,
-      title={"Image, Tell me your story!" Predicting the original meta-context of visual misinformation}, 
-      author={Jonathan Tonglet and Marie-Francine Moens and Iryna Gurevych},
-      year={2024},
-      journal={arXiv preprint arXiv:2408.09939},
-      doi={https://doi.org/10.48550/arXiv.2408.09939},
-      url={https://arxiv.org/abs/2408.09939}, 
+  title={"Image, Tell me your story!" Predicting the original meta-context of visual misinformation},
+  author={Tonglet, Jonathan and Moens, Marie-Francine and Gurevych, Iryna},
+  journal={arXiv preprint arXiv:2408.09939},
+  year={2024},
+  doi={10.48550/arXiv.2408.09939},
+  url={https://www.arxiv.org/abs/2408.09939}
 }
 ```
 

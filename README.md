@@ -1,6 +1,6 @@
 # Image, Tell me your story! Predicting the original meta-context of visual misinformation
 
-[![Arxiv](https://img.shields.io/badge/Arxiv-YYMM.NNNNN-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2408.09939)
+[![Arxiv](https://img.shields.io/badge/Arxiv-2408.09939-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2408.09939)
 [![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
 [![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 

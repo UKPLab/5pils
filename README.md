@@ -155,7 +155,7 @@ $ python scripts/evaluation_ranking.py
 
 If you use the 5Pils dataset or this code in your work, please cite our paper as follows:
 
-```
+```bibtex 
 @article{tonglet2024imagetellstorypredicting,
   title={"Image, Tell me your story!" Predicting the original meta-context of visual misinformation},
   author={Tonglet, Jonathan and Moens, Marie-Francine and Gurevych, Iryna},

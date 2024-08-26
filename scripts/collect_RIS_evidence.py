@@ -57,7 +57,7 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Collect evidence using Google Reverse Image Search.')
     parser.add_argument('--collect_google', type=int, default=0, 
                         help='Whether to collect evidence URLs with the google API. If 0, it is assumed that a file containing URLs already exists.')
-    parser.add_argumen('--evidence_urls', type=str, default='dataset/retrieval_results/evidence_urls.json',
+    parser.add_argument('--evidence_urls', type=str, default='dataset/retrieval_results/evidence_urls.json',
                         help='Path to the list of evidence URLs to scrape. Needs to be a valid file if collect_google is set to 0.')
     parser.add_argument('--google_vision_api_key', type=str,  default= " ", #Provide your own key here as default value
                         help='Your key to access the Google Vision services, including the web detection API. Only needed if collect_google is set to 1.')  

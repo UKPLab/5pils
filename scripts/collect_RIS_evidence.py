@@ -26,6 +26,7 @@ def detect_web(path,how_many_queries=30):
 
     page_urls = []
     matching_image_urls = {}
+    visual_entities = {}
 
     if annotations.pages_with_matching_images:
         print(
@@ -37,11 +38,18 @@ def detect_web(path,how_many_queries=30):
         for page in annotations.pages_with_matching_images:
             page_urls.append(page.url)
             if page.full_matching_images:
+                #List of image URLs for that webpage (the image can appear more than once)
                 matching_image_urls[page.url] = [image.url for image in page.full_matching_images]
+            else:
+                matching_image_urls[page.url] = []
             if page.partial_matching_images: 
-                matching_image_urls[page.url] = [image.url for image in page.partial_matching_images] 
+                matching_image_urls[page.url] += [image.url for image in page.partial_matching_images] 
     else:
         print('No matching images found for ' + path)
+    if annotations.web_entities:
+        for entity in annotations.web_entities:
+            #Collect web entities as entity-score dictionary pairs
+            visual_entities[entity.description] = entity.score
 
     if response.error.message:
         raise Exception(
@@ -49,7 +57,7 @@ def detect_web(path,how_many_queries=30):
             "https://cloud.google.com/apis/design/errors".format(response.error.message)
         )
     
-    return page_urls, matching_image_urls
+    return page_urls, matching_image_urls, visual_entities
 
 
 
@@ -63,8 +71,8 @@ if __name__=='__main__':
                         help='Your key to access the Google Vision services, including the web detection API. Only needed if collect_google is set to 1.')  
     parser.add_argument('--image_path', type=str, default='dataset/processed_img/',
                         help='The folder where the images are stored.') 
-    parser.add_argument('--output_dir_urls', type=str, default='dataset/retrieval_results/ris.txt',
-                        help='The txt file to store the RIS urls.') 
+    parser.add_argument('--raw_ris_urls_path', type=str, default='dataset/retrieval_results/ris_results.json',
+                        help='The json file to store the raw RIS results.') 
     parser.add_argument('--scrape_with_trafilatura', type=int, default=1, 
                         help='Whether to scrape the evidence URLs with trafilatura. If 0, it is assumed that a file containing the scraped webpages already exists.') 
     parser.add_argument('--trafilatura_path', type=str, default='dataset/retrieval_results/trafilatura_data.json',
@@ -86,15 +94,23 @@ if __name__=='__main__':
 
     #Google RIS
     if args.collect_google:
-        with open(args.output_dir_urls,'a',encoding='utf-8') as output_file:
-            for path in tqdm(os.listdir(args.image_path)):
-                urls, images = detect_web(args.image_path +path,args.max_results)
-                output_file.write(f"{args.image_path + path} | {';'.join(urls)} | {str(images)} \n")
-                time.sleep(args.sleep)
-
-
+        #Change the output file
+        raw_ris_results = []
+        for path in tqdm(os.listdir(args.image_path)):
+            urls, image_urls, vis_entities  = detect_web(args.image_path +path, args.max_results)
+            raw_ris_results.append({'image path':args.image_path + path, 
+                                    'urls': urls, 
+                                    'image urls': image_urls,  
+                                    'visual entities': vis_entities
+                                    }
+            )
+            time.sleep(args.sleep)
+        with open(args.raw_ris_urls_path, 'w') as file:
+            #Save raw results
+            json.dump(raw_ris_results, file, indent=4)
         #Apply filtering to the URLs to remove content produced by FC organizations and content that is not scrapable
-        selected_data = get_filtered_retrieval_results(args.output_dir_urls)
+        selected_data = get_filtered_retrieval_results(args.raw_ris_urls_path)
+
     else:
         #Load evidence that have already been collected 
         #Further ensure that there is a corresponding image already downloaded

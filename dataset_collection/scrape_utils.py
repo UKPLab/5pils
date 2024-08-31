@@ -1,7 +1,6 @@
 import Levenshtein as lev
 from dateutil.tz import tzutc
 from dateutil import parser
-import ast 
 import requests
 from trafilatura import bare_extraction
 from bs4 import BeautifulSoup as bs
@@ -12,6 +11,9 @@ import requests as rq
 import os
 import time
 import numpy as np
+import sys 
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+from utils import *
 
 
 def scrape_image(url,article):
@@ -176,36 +178,6 @@ def collect_articles(urls,parser,scrape_images=True,sleep=10):
             time.sleep(sleep)
 
 
-def load_ris_urls(path):
-    '''
-    Load the URLs of Reverse Image Search results.
-    '''
-    with open(path) as file:
-        urls = []
-        raw_urls = []
-        image_urls = []
-        dataset_image_path = []
-        f = file.read().split('\n')
-        for i in range(len(f)):
-            try:
-                line =  f[i].split(' | ')[1].split(';')
-                image_dict = ast.literal_eval(f[i].split(' | ')[2])
-            except:
-                pass
-            for u in line :
-                dataset_image_path.append(f[i].split(' | ')[0])
-                raw_urls.append(u)
-                if u in image_dict.keys():
-                    image_urls.append(image_dict[u])
-                else:
-                    image_urls.append([])
-                try:
-                    urls.append(u.split('/')[0] + '//' + u.split('/')[2])
-                except:
-                    urls.append(u)
-    return urls, raw_urls, image_urls, dataset_image_path
-
-
 def is_obfuscated_or_encoded(url):
     '''
     Check that the evidence url is not obfuscated or encoded.
@@ -273,28 +245,31 @@ def is_banned(url):
 def get_filtered_retrieval_results(path):
     '''
     Filter the results of reverse image search.
+    Args:
+        path (str): path to the file that contains the raw RIS results from Google Reverse Image Search
     '''
-    urls, raw_urls, image_urls, dataset_image_path = load_ris_urls(path)
+    ris_results = load_json(path)
     retrieval_results = []
-    # Iterate over the URLs and apply the conditions
-    for i in range(len(urls)):
-        # Create a dictionary for each set of URL data
-        ris_data = {
-            'image path': dataset_image_path[i],
-            'domain url': urls[i],
-            'raw url': raw_urls[i],
-            'image urls': image_urls[i],
-            'is_fc': is_fc_organization(urls[i]),
-            'is_https': raw_urls[i].startswith('https')
-        }
-        # Apply additional conditions to each dictionary
-        ris_data['is_banned'] = is_banned(ris_data['raw url'])
-        ris_data['is_obfuscated'] = is_obfuscated_or_encoded(ris_data['raw url'])  # Assuming 'type' condition is handled elsewhere or removed
-        ris_data['is_html'] = is_likely_html(ris_data['raw url'])
-        # Selection condition
-        ris_data['selection'] = ris_data['is_html'] and ris_data['is_https'] and not ris_data['is_obfuscated'] and not ris_data['is_banned']
-        # Append the dictionary to the list if it meets all the criteria
-        retrieval_results.append(ris_data)
+    # Iterate over the URLs and apply the filters
+    for i in range(len(ris_results)):
+        for u in range(len(ris_results[i]['urls'])):
+            #Loop through all evidence urls, and see if they meet the requirements
+            evidence_url = ris_results[i]['urls'][u]
+            ris_data = {
+                'image path': ris_results[i]['image path'], 
+                'raw url': evidence_url,
+                'image urls': ris_results[i]['image urls'][evidence_url], 
+                'is_fc': is_fc_organization('/'.join(evidence_url.split('/')[:3])),
+                'is_https': evidence_url.startswith('https')
+            }
+            # Apply additional conditions to each dictionary
+            ris_data['is_banned'] = is_banned(ris_data['raw url'])
+            ris_data['is_obfuscated'] = is_obfuscated_or_encoded(ris_data['raw url'])  
+            ris_data['is_html'] = is_likely_html(ris_data['raw url'])
+            # Selection condition
+            ris_data['selection'] = ris_data['is_html'] and ris_data['is_https'] and not ris_data['is_obfuscated'] and not ris_data['is_banned']
+            # Append the dictionary to the list if it meets all the criteria
+            retrieval_results.append(ris_data)
 
     # Filter the data based on the selection criteria
     selected_retrieval_results = [d for d in retrieval_results if d['selection']]

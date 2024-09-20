@@ -14,6 +14,10 @@ The dataset is also available on [TUdatalib](https://tudatalib.ulb.tu-darmstadt.
 
 Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions. 
 
+## News 📢
+
+- Our paper is accepted to EMNLP 2024 Main Conference! See you in Miami 🏖️
+
 ## Abstract 
 > To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human factchecking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with questionanswer pairs about their original meta-context. Annotations are based on the 5 Pillars factchecking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
 

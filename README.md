@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
 [![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 
-This repository contains the 5Pils dataset, introduced in the paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://arxiv.org/abs/2408.09939). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
+This repository contains the 5Pils dataset, introduced in the paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://aclanthology.org/2024.emnlp-main.448/). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
 
 Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de) 
 
@@ -161,13 +161,21 @@ $ python scripts/evaluation_ranking.py
 If you use the 5Pils dataset or this code in your work, please cite our paper as follows:
 
 ```bibtex 
-@article{tonglet2024imagetellstorypredicting,
-  title={"Image, Tell me your story!" Predicting the original meta-context of visual misinformation},
-  author={Tonglet, Jonathan and Moens, Marie-Francine and Gurevych, Iryna},
-  journal={arXiv preprint arXiv:2408.09939},
-  year={2024},
-  doi={10.48550/arXiv.2408.09939},
-  url={https://www.arxiv.org/abs/2408.09939}
+@inproceedings{tonglet-etal-2024-image,
+    title = "{``}Image, Tell me your story!{''} Predicting the original meta-context of visual misinformation",
+    author = "Tonglet, Jonathan  and
+      Moens, Marie-Francine  and
+      Gurevych, Iryna",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.448",
+    pages = "7845--7864",
 }
 ```
 

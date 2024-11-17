@@ -35,7 +35,7 @@ More information about the dataset structure can be found in the README file of 
 Three images from the dataset are shown below.
 
 <p align="center">
-  <img width="70%" src="assets/5Pils_examples.png" alt="header" />
+  <img width="120%" src="assets/5Pils_examples.png" alt="header" />
 </p>
 
 

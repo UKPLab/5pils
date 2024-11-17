@@ -1,10 +1,9 @@
 # Image, Tell me your story! Predicting the original meta-context of visual misinformation
 
-[![Arxiv](https://img.shields.io/badge/Arxiv-2408.09939-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2408.09939)
 [![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
 [![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 
-This repository contains the 5Pils dataset, introduced in the paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://aclanthology.org/2024.emnlp-main.448/). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
+This repository contains the 5Pils dataset, introduced in the EMNLP 2024 paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://aclanthology.org/2024.emnlp-main.448/). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
 
 Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de) 
 
@@ -16,10 +15,11 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 
 ## News 📢
 
+- Iryna Gurevych presented 5Pils during the opening keynote of [ECAI](https://www.ecai2024.eu/programme/keynotes)
 - Our paper is accepted to EMNLP 2024 Main Conference! See you in Miami 🏖️
 
 ## Abstract 
-> To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human fact-checking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with question-answer pairs about their original meta-context. Annotations are based on the 5 Pillars factchecking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
+> To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human fact-checking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with question-answer pairs about their original meta-context. Annotations are based on the 5 Pillars fact-checking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
 
 <p align="center">
   <img width="70%" src="assets/introducory_example.png" alt="header" />
@@ -31,6 +31,14 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 
 The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework for image contextualization. The dataset annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
 More information about the dataset structure can be found in the README file of the dataset folder.
+
+Three images from the dataset are shown below.
+
+<p align="center">
+  <img width="70%" src="assets/5Pils_examples.png" alt="header" />
+</p>
+
+
 
 ### ❕**Content warning** ❕
 > 5Pils contains examples of real-world misinformation.  Due to the real-world nature of the data, events covered include wars and conflicts. As a result, some images contain graphic, violent content. When collecting the data, we decided not to filter out images with violent content to cover the actual distribution of images that our target users, professional fact-checkers, would want to provide as input. Given
@@ -82,9 +90,7 @@ $ python -m spacy download en_core_web_lg
 
 ## Usage - dataset
 
-
-
-To use the dataset, you need to collect the images based on the 1,676 FC article urls provided in dataset/url/article_urls.txt:
+To use the dataset, you need to collect the images based on the 1,676 FC article urls provided in dataset/url/article_urls.txt. If you face issues with the download of the images, please contact us at jonathan.tonglet@tu-darmstadt.de.
 
 ```
 $ python scripts/build_dataset_from_url.py

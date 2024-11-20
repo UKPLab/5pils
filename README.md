@@ -1,10 +1,9 @@
 # Image, Tell me your story! Predicting the original meta-context of visual misinformation
 
-[![Arxiv](https://img.shields.io/badge/Arxiv-2408.09939-red?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2408.09939)
 [![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
 [![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 
-This repository contains the 5Pils dataset, introduced in the paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://arxiv.org/abs/2408.09939). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is realeased under a **CC-BY-SA-4.0** license.
+This repository contains the 5Pils dataset, introduced in the EMNLP 2024 paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://aclanthology.org/2024.emnlp-main.448/). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
 
 Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de) 
 
@@ -14,8 +13,13 @@ The dataset is also available on [TUdatalib](https://tudatalib.ulb.tu-darmstadt.
 
 Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions. 
 
+## News 📢
+
+- Iryna Gurevych presented 5Pils during the opening keynote of [ECAI](https://www.ecai2024.eu/programme/keynotes)
+- Our paper is accepted to EMNLP 2024 Main Conference! See you in Miami 🏖️
+
 ## Abstract 
-> To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human factchecking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with questionanswer pairs about their original meta-context. Annotations are based on the 5 Pillars factchecking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
+> To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human fact-checking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with question-answer pairs about their original meta-context. Annotations are based on the 5 Pillars fact-checking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
 
 <p align="center">
   <img width="70%" src="assets/introducory_example.png" alt="header" />
@@ -28,9 +32,17 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework for image contextualization. The dataset annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
 More information about the dataset structure can be found in the README file of the dataset folder.
 
+Three images from the dataset are shown below.
+
+<p align="center">
+  <img width="120%" src="assets/5Pils_examples.png" alt="header" />
+</p>
+
+
+
 ### ❕**Content warning** ❕
 > 5Pils contains examples of real-world misinformation.  Due to the real-world nature of the data, events covered include wars and conflicts. As a result, some images contain graphic, violent content. When collecting the data, we decided not to filter out images with violent content to cover the actual distribution of images that our target users, professional fact-checkers, would want to provide as input. Given
-the graphic nature of some images, we do not release them directly. Instead, we do publicly release the URLs of the FC articles, as well as the script that allows to collect and process the images.
+the graphic nature of some images, we do not release them directly. Instead, we do publicly release the URLs of the FC articles, as well as the script that allows us to collect and process the images.
 
 ### 5Pils example
 
@@ -87,7 +99,8 @@ $ python scripts/build_dataset_from_url.py
 
 ## Usage - evaluation
 
-Evaluate the performance of a model on 5Pils, for a specific pillar. In this example, we conduct the evaluation for Date.
+Evaluate the performance of a model on 5Pils for a specific pillar. In this example, we evaluate Date.
+The results need to be contained in a list of dictionaries, where each dictionary is an instance and contains an 'output' and a 'ground_truth'. The 'output' should be a string.
 
 ```
 $ python scripts/evaluate_answer_generation.py --results_file output/results_date.json --task date
@@ -155,13 +168,21 @@ $ python scripts/evaluation_ranking.py
 If you use the 5Pils dataset or this code in your work, please cite our paper as follows:
 
 ```bibtex 
-@article{tonglet2024imagetellstorypredicting,
-  title={"Image, Tell me your story!" Predicting the original meta-context of visual misinformation},
-  author={Tonglet, Jonathan and Moens, Marie-Francine and Gurevych, Iryna},
-  journal={arXiv preprint arXiv:2408.09939},
-  year={2024},
-  doi={10.48550/arXiv.2408.09939},
-  url={https://www.arxiv.org/abs/2408.09939}
+@inproceedings{tonglet-etal-2024-image,
+    title = "{``}Image, Tell me your story!{''} Predicting the original meta-context of visual misinformation",
+    author = "Tonglet, Jonathan  and
+      Moens, Marie-Francine  and
+      Gurevych, Iryna",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.448",
+    pages = "7845--7864",
 }
 ```
 

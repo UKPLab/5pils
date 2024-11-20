@@ -91,7 +91,7 @@ $ python -m spacy download en_core_web_lg
 
 ## Usage - dataset
 
-To use the dataset, you need to scrape the images using the following script:
+To use the dataset, you need to scrape the images using the following script. If you face issues downloading the images, please contact jonathan.tonglet@tu-darmstadt.de
 
 ```
 $ python scripts/build_dataset_from_url.py

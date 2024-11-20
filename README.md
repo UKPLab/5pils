@@ -51,7 +51,8 @@ the graphic nature of some images, we do not release them directly. Instead, we 
         "verification strategy": "['reverse image search']",
         "verification tool": "['Other/Unspecified']",
         "claimed location": "Kabul, Afghanistan",
-        "claimed date": "2021"
+        "claimed date": "2021",
+        "image URL": "https://factly.in/wp-content/uploads//2021/08/IAF-Airlift-Afghanistan-FB-Post.jpg"
     }
 
 ````
@@ -78,9 +79,7 @@ $ python -m spacy download en_core_web_lg
 
 ## Usage - dataset
 
-
-
-To use the dataset, you need to collect the images based on the 1,676 FC article urls provided in dataset/url/article_urls.txt:
+To use the dataset, you need to scrape the images using the following script:
 
 ```
 $ python scripts/build_dataset_from_url.py

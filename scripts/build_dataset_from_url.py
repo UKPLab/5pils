@@ -7,8 +7,6 @@ from utils import *
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Download articles and images based on provided URLs.')
-    parser.add_argument('--file_path', type=str, default='dataset/url/article_urls.txt',
-                        help='File path of the URLs to scrape.')
     parser.add_argument('--scrape_image', type=int, default=1,
                         help='If 1, downloads the FC images in addition to the article text. If 0, assumes the images have already been scraped.') 
     parser.add_argument('--image_processing_script', type=str, default='dataset/image_processing_instructions.txt',
@@ -18,14 +16,31 @@ if __name__=='__main__':
 
     args = parser.parse_args()
     #Collect the article and image for the 1676 instances of the 5Pillars dataset
-    urls = open(args.file_path,'r').read().split('\n')
+    train = load_json('dataset/train.json')
+    val = load_json('dataset/val.json')
+    test = load_json('dataset/test.json')
+    urls = [t['URL'] for t in train] + [t['URL'] for t in val] + [t['URL'] for t in test]
+    image_urls = [t['image URL'] for t in train] + [t[' image URL'] for t in val] + [t['image URL'] for t in test]
+    #Group the URL by FC organization, as each organization uses a different parser
+    factly_urls, factlyu_image_urls =  [], []
+    pesacheck_urls, pesacheck_image_urls =  [], []
+    two11org_urls, two11org_image_urls =  [], []
+    for u in range(len(urls)):
+        if 'factly.in' in urls[u]:
+            factly_urls.append(urls[u])
+            factlyu_image_urls.append(image_urls[u])
+        elif 'pesacheck.org' in urls[u]:
+            pesacheck_urls.append(urls[u])
+            pesacheck_image_urls.append(image_urls[u])
+        elif '211check.org' in urls[u]:
+            two11org_urls.append(urls[u])
+            two11org_image_urls.append(image_urls[u])
+        else:
+            pass
     #Scrape the article content and the images
-    factly_urls = [u for u in urls if 'factly.in' in u]
-    collect_articles(factly_urls,factly_parser,args.scrape_image,args.sleep)
-    pesacheck_urls = [u for u in urls if 'pesacheck.org' in u]
-    collect_articles(pesacheck_urls,pesacheck_parser,args.scrape_image,args.sleep)
-    two11org_urls = [u for u in urls if '211check.org' in u]
-    collect_articles(two11org_urls,two11org_parser,args.scrape_image,args.sleep)
+    collect_articles(factly_urls,factly_parser,args.scrape_image, factlyu_image_urls, args.sleep)
+    collect_articles(pesacheck_urls,pesacheck_parser,args.scrape_image, pesacheck_image_urls, args.sleep)
+    collect_articles(two11org_urls,two11org_parser,args.scrape_image, two11org_image_urls, args.sleep)
     #Image processing
     if not 'processed_img' in os.listdir('dataset/'):
         os.mkdir('dataset/processed_img/')

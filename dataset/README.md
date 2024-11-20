@@ -18,6 +18,7 @@ Each record contains the following items:
 **Main items**
 
 - `URL`: URL leading to the fact-checking article
+- `image URL`: URL leading to the fact-checked image
 - `image path` : local path to the image
 - `publication date` : publication date of the fact-checking article
 - `was the photo used before?` : answer to the Provenance pillar
@@ -58,7 +59,8 @@ The following items are provided as metadata for analysis purpose
         "verification strategy": "['reverse image search']",
         "verification tool": "['Other/Unspecified']",
         "claimed location": "Kabul, Afghanistan",
-        "claimed date": "2021"
+        "claimed date": "2021",
+        "image URL": "https://factly.in/wp-content/uploads//2021/08/IAF-Airlift-Afghanistan-FB-Post.jpg"
     }
 
 ````

@@ -145,36 +145,46 @@ def factly_parser(url):
     return text, image_urls
 
 
-def collect_articles(urls,parser,scrape_images=True,sleep=10):
+def collect_articles(urls,
+                     parser, 
+                     scrape_images=True, 
+                     image_urls=None,
+                     sleep=10):
     '''
-    Parse the text and image from raw fact-checking articles.
+    Collect the fact-checking articles and images based on their URLs.
     '''
     img_urls_unique = set()
     if 'article' not in os.listdir('dataset/'):
         os.mkdir('dataset/article/')
-    for u in urls:
+    for u in range(len(urls)):
         files = [f.split('.txt')[0] for f in os.listdir('dataset/article/')]
         is_new_article=True
-        if  u.split('/')[-1].split('?')[0]  in files:
+        if  urls[u].split('/')[-1].split('?')[0]  in files:
             is_new_article = False
-            print('Already scraped : ' + u.split('/')[-1].split('?')[0])
+            print('Already scraped : ' + urls[u].split('/')[-1].split('?')[0])
         if is_new_article:
-            path = 'dataset/article/'+ u.split('/')[-1].split('?')[0] + '.txt'
-            text, image_urls = parser(u) #Use a platform specific parser
-            image_urls = [img for img in image_urls if img not in img_urls_unique]
-            for img in image_urls:
+            path = 'dataset/article/'+ urls[u].split('/')[-1].split('?')[0] + '.txt'
+            text, scraped_image_urls = parser(urls[u]) #Use a platform specific parser
+            scraped_image_urls = [img for img in scraped_image_urls if img not in img_urls_unique]
+            for img in scraped_image_urls:
                     img_urls_unique.add(img)    
             #Save text
             with open(path,'w',encoding='utf-8') as f:
-                text = 'URL: ' + u + '\n' + text
+                text = 'URL: ' + urls[u] + '\n' + text
                 f.write(text)
             if scrape_images:
                 #Scrape the image and save the content
                 if 'img' not in os.listdir('dataset/'):
                     os.mkdir('dataset/img/')
-                for im_url in image_urls:
-                    scrape_image(im_url, path.split('/')[-1])
+                if image_urls!= None:
+                    #A reference image url is already provided as part of the dataset
+                    scrape_image(image_urls[u], path.split('/')[-1])
                     time.sleep(3)
+                else:
+                    #If no existing image urls are provided, default to the scraped ones
+                    for im_url in scraped_image_urls:
+                        scrape_image(im_url, path.split('/')[-1])
+                        time.sleep(3)
             time.sleep(sleep)
 
 

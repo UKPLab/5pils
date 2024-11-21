@@ -59,8 +59,8 @@ if __name__=='__main__':
     test = load_json('dataset/test.json')
     task_test = [t for t in test if t[args.task]!='not enough information']
     image_paths = [t['image path'] for t in task_test]
-    if task=='date':
-        ground_truth = [t['date_numeric'] for t in task_test]
+    if args.task=='date':
+        ground_truth = [t['date numeric label'] for t in task_test]
     else:
         ground_truth = [t[args.task] for t in task_test]
 
@@ -90,7 +90,8 @@ if __name__=='__main__':
                 demo_image = demonstration_candidates[idx]['image path']
                 demo_answer = demonstration_candidates[idx][args.task]
                 demo_evidence_idx = get_topk_evidence(demo_image,evidence,image_embeddings, clip_evidence_embeddings, image_embeddings_map)
-                demo_evidence = [evidence[idx] for idx in demo_evidence_idx]
+                evidence_image_subset = [ev for ev in evidence if ev['image path']==demo_image]
+                demo_evidence = [evidence_image_subset[idx] for idx in demo_evidence_idx]
                 instance_demonstrations.append((demo_image, demo_answer, demo_evidence))
             demonstrations.append(instance_demonstrations)
         else:

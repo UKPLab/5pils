@@ -25,7 +25,7 @@ if __name__=='__main__':
     evidence_embeddings = compute_clip_text_embeddings(text_list, text_model, tokenizer, batch_size=16)
     np.save('dataset/embeddings/evidence_embeddings.npy', evidence_embeddings)
 
-    #Images
+    #Images: used for demonstration selection based on image similarity
     image_model, preprocess = clip.load('ViT-L/14', device=device)
     image_paths = ['dataset/processed_img/' + i for i in os.listdir('dataset/processed_img/')]
     # map each image to its index in the embedding matrix

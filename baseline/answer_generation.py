@@ -75,7 +75,9 @@ def run_model(image_paths,
     for i in tqdm(range(len(image_paths))):
         if modality in ['evidence','multimodal']:
             if len(evidence_idx[i])!=0:
-                evidence_selection = [evidence[idx] for idx in evidence_idx[i]]
+                #Take the subset of evidence matching the image, then take the top K based on CLIP ranking
+                evidence_image_subset = [ev for ev in evidence if ev['image path']==image_paths[i]]
+                evidence_selection = [evidence_image_subset[idx] for idx in evidence_idx[i]]
                 if len(demonstrations[i])!=0:
                     prompt = assembler(question, evidence=evidence_selection,
                                          modality=modality,demonstrations=demonstrations[i])
@@ -94,7 +96,6 @@ def run_model(image_paths,
                 prompt = assembler(question, modality = 'vision', demonstrations=demonstrations[i])
             else:
                 prompt = assembler(question, modality = 'vision')
-        
         if modality=='evidence':
             if len(evidence_idx[i])==0:
                 print('No evidence')
@@ -126,7 +127,7 @@ def run_model(image_paths,
             else:
                 print('Error : wrong model provided')
                 break
-        #Save results
+        # Save results
         if type(output)==str:
             data = {}
             data['img_path'] = image_paths[i]

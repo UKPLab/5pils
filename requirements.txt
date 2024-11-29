@@ -1,5 +1,6 @@
 accelerate==0.26.0
 beautifulsoup4==4.12.2
+bert_score==0.3.13
 bitsandbytes==0.41.3
 git+https://github.com/openai/CLIP.git
 datasets==2.16.1

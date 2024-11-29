@@ -5,6 +5,7 @@ from evaluation.evaluation_metrics import *
 from utils import *
 import argparse
 import spacy
+from tqdm import tqdm
 
 if __name__=='__main__':
     parser = argparse.ArgumentParser(description='Evaluate generated answers')
@@ -34,7 +35,7 @@ if __name__=='__main__':
     nlp = spacy.load(args.ner_model)
 
 
-    for r in results:
+    for r in tqdm(results):
         if args.task ==  'source':
             scores = evaluate(r['output'], r['ground_truth'], args.task)
             rougeL.append(scores['rougeL'])
@@ -44,7 +45,8 @@ if __name__=='__main__':
             exact_match.append(scores['exact_match'])
             delta.append(scores['delta'])
         elif args.task=='location':
-
+            if args.geonames_username==" ":
+                raise ValueError('Missing --geonames_username parameter. Please create a free geonames account before evaluating location.')
             geonames_entries = set([d['query'] for d in load_json(args.geonames_data)])
             NER_ground_truth = [e for e in extract_named_entities(r['ground_truth'], nlp, 'locations')  if e in geonames_entries]
             scores = evaluate(r['output'], r['ground_truth'], args.task)

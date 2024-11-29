@@ -53,8 +53,8 @@ def save_result(output,json_file_path):
     '''
     try:    
         if type(output)==str:
-            user_data = json.loads(output)
-            append_to_json(json_file_path, user_data)
+            output = json.loads(output)
+            append_to_json(json_file_path, output)
         else:
             append_to_json(json_file_path, output)
     except json.JSONDecodeError:

@@ -48,11 +48,6 @@ if __name__=='__main__':
     if 'output' not in os.listdir():
         os.mkdir('output/')
     map_manipulated = load_json(args.map_manipulated_original)
-    try:
-        results_json = load_json(args.results_file)
-    except:
-        # file does not exist yet
-        results_json = []
     #Prepare data
     train = load_json('dataset/train.json')
     #Load test images
@@ -101,7 +96,7 @@ if __name__=='__main__':
     run_model(image_paths, 
               args.task, 
               ground_truth, 
-              results_json,
+              args.results_file,
               map_manipulated, 
               args.modality, 
               args.model, 

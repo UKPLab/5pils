@@ -107,9 +107,8 @@ def run_model(image_paths,
                                                 max_tokens=max_tokens) 
                 elif model=='llava':
                     output = llava_prompting(prompt,image_paths[i],pipe,map_manipulated,temperature,max_tokens)
-                elif model=='lama':
+                elif model=='llama':
                     output = llama_prompting(prompt,pipe,tokenizer,temperature, max_tokens)
-                
                 else:
                     print('Error : wrong model provided')
                     break

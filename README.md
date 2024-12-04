@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/UKPLab/ukp-project-template)](https://opensource.org/licenses/Apache-2.0)
 [![Python Versions](https://img.shields.io/badge/Python-3.9-blue.svg?style=flat&logo=python&logoColor=white)](https://www.python.org/)
 
-This repository contains the 5Pils dataset, introduced in the EMNLP 2024 paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://aclanthology.org/2024.emnlp-main.448/). It also contains the code to run experiments with the baseline introduced in the same paper. The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
+This repository contains the 5Pils dataset, introduced in the EMNLP 2024 paper: ["Image, Tell me your story!" Predicting the original meta-context of visual misinformation](https://aclanthology.org/2024.emnlp-main.448/). The code is released under an **Apache 2.0** license, while the dataset is released under a **CC-BY-SA-4.0** license.
 
 Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de) 
 
@@ -32,7 +32,6 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework for image contextualization. The dataset annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
 More information about the dataset structure can be found in the README file of the dataset folder.
 
-Three images from the dataset are shown below.
 
 <p align="center">
   <img width="120%" src="assets/5Pils_examples.png" alt="header" />
@@ -82,12 +81,6 @@ $ pip install -r requirements.txt
 $ python -m spacy download en_core_web_lg
 ```
 
-### Google Vision API and Azure OpenAI service
-
-- Our baseline model relies on evidence retrieved with reverse image search using the [Google Vision API](https://cloud.google.com/vision/docs/detecting-web). All URLs for the text evidence that we used in our experiments are provided in this repo. However, should you want to collect your own evidence, you will need to create a Google Cloud account and create an API key, or use a different reverse image search service.
-
-- If you want to use GPT4(-Vision) for answer generation, you will need an Azure account with access to the [Azure OpenAI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview).
-
 
 ## Usage - dataset
 
@@ -100,7 +93,7 @@ $ python scripts/build_dataset_from_url.py
 ## Usage - evaluation
 
 Evaluate the performance of a model on 5Pils for a specific pillar. In this example, we evaluate Date.
-The results need to be contained in a list of dictionaries, where each dictionary is an instance and contains an 'output' and a 'ground_truth'. The 'output' should be a string.
+The results need to be contained in a list of dictionaries, where each dictionary is an instance and contains an 'output' and a 'ground_truth'. 'output' should be a string.
 
 ```
 $ python scripts/evaluate_answer_generation.py --results_file output/results_date.json --task date
@@ -155,13 +148,11 @@ Generate answers for a specific pillar using a LLM or Multimodal LLM. In this ex
 $ python scripts/get_5pillars_answers.py --results_file output/results_date.json --task date --modality multimodal --n_shots 0 --model llava
 ```
 
-### Evaluate the evidence ranking
+### Google Vision API and Azure OpenAI service
 
-Evaluate the quality of the evidence ranking:
+- Our baseline model relies on evidence retrieved with reverse image search using the [Google Vision API](https://cloud.google.com/vision/docs/detecting-web). Should you want to collect your own evidence with the same API, you will need to create a Google Cloud account.
 
-```
-$ python scripts/evaluation_ranking.py
-```
+- If you want to use GPT4(-Vision) for answer generation, you will need an Azure account with access to the [Azure OpenAI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview).
 
 ## Citation
 

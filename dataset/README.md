@@ -67,7 +67,7 @@ The following items are provided as metadata for analysis purpose
 
 # Other files  🗃️
 
-The following other files can be found in the dataset folder:
+The following files can be found in the dataset folder:
 
 - geonames_results.json: the mapping from the locations of 5Pils to GeoNames coordinates and hierarchies
 - image_processing_instructions.txt: instructions to automate the cropping of the raw images collected from FC articles

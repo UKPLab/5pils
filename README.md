@@ -41,7 +41,7 @@ More information about the dataset structure can be found in the README file of 
 
 ### ❕**Content warning** ❕
 > 5Pils contains examples of real-world misinformation.  Due to the real-world nature of the data, events covered include wars and conflicts. As a result, some images contain graphic, violent content. When collecting the data, we decided not to filter out images with violent content to cover the actual distribution of images that our target users, professional fact-checkers, would want to provide as input. Given
-the graphic nature of some images, we do not release them directly. Instead, we do publicly release the URLs of the FC articles, as well as the script that allows us to collect and process the images.
+the graphic nature of some images, we do not release them directly. Instead, we do publicly release the URLs of the FC articles and the images.
 
 ### 5Pils example
 
@@ -72,7 +72,7 @@ the graphic nature of some images, we do not release them directly. Instead, we 
 
 ### Environment
 
-Follow these instructions to recreate thy python environment used for all our experiments. All experiments with Llava and Llama2 ran on A100 GPUs.
+Follow these instructions to recreate the environment used for all our experiments.
 
 ```
 $ conda create --name 5Pils python=3.9
@@ -82,9 +82,9 @@ $ python -m spacy download en_core_web_lg
 ```
 
 
-## Usage - dataset
+## Usage - dataset preparation
 
-To use the dataset, you need to scrape the images using the following script. If you face issues downloading the images, please contact jonathan.tonglet@tu-darmstadt.de
+To use the dataset, you need to collect the images using the following script. If you face issues downloading the images, please contact jonathan.tonglet@tu-darmstadt.de
 
 ```
 $ python scripts/build_dataset_from_url.py
@@ -93,7 +93,7 @@ $ python scripts/build_dataset_from_url.py
 ## Usage - evaluation
 
 Evaluate the performance of a model on 5Pils for a specific pillar. In this example, we evaluate Date.
-The results need to be contained in a list of dictionaries, where each dictionary is an instance and contains an 'output' and a 'ground_truth'. 'output' should be a string.
+The results need to be contained in a list of dictionaries, where each dictionary contains an 'output' and a 'ground_truth' kzy. 'output' should be a string.
 
 ```
 $ python scripts/evaluate_answer_generation.py --results_file output/results_date.json --task date
@@ -142,7 +142,7 @@ $ python scripts/get_embeddings.py
 
 ### Generate answers
 
-Generate answers for a specific pillar using a LLM or Multimodal LLM. In this example, we generate answers for Date with multimodal zero-shot Llava:
+Generate answers for a specific pillar. In this example, we generate answers for Date with multimodal zero-shot Llava:
 
 ```
 $ python scripts/get_5pillars_answers.py --results_file output/results_date.json --task date --modality multimodal --n_shots 0 --model llava
@@ -150,7 +150,7 @@ $ python scripts/get_5pillars_answers.py --results_file output/results_date.json
 
 ### Google Vision API and Azure OpenAI service
 
-- Our baseline model relies on evidence retrieved with reverse image search using the [Google Vision API](https://cloud.google.com/vision/docs/detecting-web). Should you want to collect your own evidence with the same API, you will need to create a Google Cloud account.
+- Our baseline model relies on evidence retrieved with reverse image search using the [Google Vision API](https://cloud.google.com/vision/docs/detecting-web). Should you want to collect your own evidence, you will need a Google Cloud account.
 
 - If you want to use GPT4(-Vision) for answer generation, you will need an Azure account with access to the [Azure OpenAI service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview).
 

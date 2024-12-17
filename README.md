@@ -15,22 +15,23 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 
 ## News 📢
 
-- Iryna Gurevych presented 5Pils during the opening keynote of [ECAI](https://www.ecai2024.eu/programme/keynotes)
+- Iryna Gurevych presented 5Pils during the opening keynote of [ECAI](https://www.ecai2024.eu/programme/keynotes) 2024
 - Our paper is accepted to EMNLP 2024 Main Conference! See you in Miami 🏖️
 
 ## Abstract 
 > To assist human fact-checkers, researchers have developed automated approaches for visual misinformation detection. These methods assign veracity scores by identifying inconsistencies between the image and its caption, or by detecting forgeries in the image. However, they neglect a crucial point of the human fact-checking process: identifying the original metacontext of the image. By explaining what is *actually true* about the image, fact-checkers can better detect misinformation, focus their efforts on check-worthy visual content, engage in counter-messaging before misinformation spreads widely, and make their explanation more convincing. Here, we fill this gap by introducing the task of automated image contextualization. We create 5Pils, a dataset of 1,676 fact-checked images with question-answer pairs about their original meta-context. Annotations are based on the 5 Pillars fact-checking framework. We implement a first baseline that grounds the image in its original meta-context using the content of the image and textual evidence retrieved from the open web. Our experiments show promising results while highlighting several open challenges in retrieval and reasoning.
 
 <p align="center">
-  <img width="70%" src="assets/introducory_example.png" alt="header" />
+  <img width="55%" src="assets/introducory_example.png" alt="header" />
 </p>
 
 
 
 ## 5Pils dataset
 
-The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework for image contextualization. The dataset annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
-More information about the dataset structure can be found in the README file of the dataset folder.
+The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework. The annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
+For downloading the images, please refer to [downloading images](## Usage - downloading images) or contact jonathan.tonglet@tu-darmstadt.de if you face issues.
+More information about the dataset can be found in the [README](https://github.com/UKPLab/5pils/blob/main/dataset/README.md) of the dataset folder.
 
 
 <p align="center">
@@ -68,9 +69,7 @@ the graphic nature of some images, we do not release them directly. Instead, we 
 
 ````
 
-## Getting started
-
-### Environment
+## Environment
 
 Follow these instructions to recreate the environment used for all our experiments.
 
@@ -82,7 +81,7 @@ $ python -m spacy download en_core_web_lg
 ```
 
 
-## Usage - dataset preparation
+## Usage - downloading images
 
 To use the dataset, you need to collect the images using the following script. If you face issues downloading the images, please contact jonathan.tonglet@tu-darmstadt.de
 

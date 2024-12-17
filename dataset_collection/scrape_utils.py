@@ -370,7 +370,7 @@ def time_difference(date1, date2):
     return dt1 < dt2
 
 
-def merge_data(evidence, evidence_metadata,dataset):
+def merge_data(evidence, evidence_metadata,dataset, apply_filtering=False):
     '''
     Merge all evidence by dropping duplicates and applying 2 filters:
     1) The evidence is not the original FC article itself
@@ -384,13 +384,15 @@ def merge_data(evidence, evidence_metadata,dataset):
                            dataset_df[['org','image path','publication date']].rename(columns={'publication date': 'date_filter'}), 
                            on='image path',how='inner')
     merged_data  = merged_data.dropna(subset='evidence url')
-    #Verify that the evidence is not the FC article itself.
-    fc_mask = merged_data.apply(lambda row : False if row['org'] in row['evidence url'] or row['org'] in ''.join(row['image url']) else True, axis=1)
-    merged_data = merged_data[fc_mask]
-    #Remove evidence that have been published after the FC article or have no publication date
-    merged_data = merged_data[~merged_data['date'].isnull()]
-    time_mask = merged_data.apply(lambda row : True if time_difference(row['date'],row['date_filter']) else False,axis=1)
-    merged_data = merged_data[time_mask]   
+    #Apply optional filtering steps
+    if apply_filtering:
+        #Verify that the evidence is not the FC article itself.
+        fc_mask = merged_data.apply(lambda row : False if row['org'] in row['evidence url'] or row['org'] in ''.join(row['image url']) else True, axis=1)
+        merged_data = merged_data[fc_mask]
+        #Remove evidence that have been published after the FC article or have no publication date
+        merged_data = merged_data[~merged_data['date'].isnull()]
+        time_mask = merged_data.apply(lambda row : True if time_difference(row['date'],row['date_filter']) else False,axis=1)
+        merged_data = merged_data[time_mask]   
     merged_data = merged_data[['image path','org','evidence url','title','author','hostname',
                            'description','sitename','date','image','image url','image caption']]
     merged_data = merged_data.drop_duplicates(subset=['evidence url','image path'])

@@ -77,6 +77,8 @@ if __name__=='__main__':
                         help='Whether to scrape the evidence URLs with trafilatura. If 0, it is assumed that a file containing the scraped webpages already exists.') 
     parser.add_argument('--trafilatura_path', type=str, default='dataset/retrieval_results/trafilatura_data.json',
                         help='The json file to store the scraped trafilatura  content as a json file.')
+    parser.add_argument('--apply_filtering', type=int, default=0,
+                        help='If 1, remove evidence published after the source FC article. Not needed if using the default evidence set')
     parser.add_argument('--json_path', type=str, default='dataset/retrieval_results/evidence.json',
                         help='The json file to store the text evidence as a json file.')
     parser.add_argument('--max_results', type=int, default=50,
@@ -132,7 +134,7 @@ if __name__=='__main__':
     #Save all results in a Pandas Dataframe
     evidence_trafilatura = load_json(args.trafilatura_path)
     dataset = load_json('dataset/train.json') + load_json('dataset/val.json')  + load_json('dataset/test.json')
-    evidence = merge_data(evidence_trafilatura, selected_data, dataset).fillna('').to_dict(orient='records')
+    evidence = merge_data(evidence_trafilatura, selected_data, dataset, apply_filtering=args.apply_filtering).fillna('').to_dict(orient='records')
     # Save the list of dictionaries as a JSON file
     with open(args.json_path, 'w') as file:
         json.dump(evidence, file, indent=4)

@@ -20,15 +20,15 @@ if __name__=='__main__':
     val = load_json('dataset/val.json')
     test = load_json('dataset/test.json')
     urls = [t['URL'] for t in train] + [t['URL'] for t in val] + [t['URL'] for t in test]
-    image_urls = [t['image URL'] for t in train] + [t[' image URL'] for t in val] + [t['image URL'] for t in test]
+    image_urls = [t['image URL'] for t in train] + [t['image URL'] for t in val] + [t['image URL'] for t in test]
     #Group the URL by FC organization, as each organization uses a different parser
-    factly_urls, factlyu_image_urls =  [], []
+    factly_urls, factly_image_urls =  [], []
     pesacheck_urls, pesacheck_image_urls =  [], []
     two11org_urls, two11org_image_urls =  [], []
     for u in range(len(urls)):
         if 'factly.in' in urls[u]:
             factly_urls.append(urls[u])
-            factlyu_image_urls.append(image_urls[u])
+            factly_image_urls.append(image_urls[u])
         elif 'pesacheck.org' in urls[u]:
             pesacheck_urls.append(urls[u])
             pesacheck_image_urls.append(image_urls[u])
@@ -38,7 +38,7 @@ if __name__=='__main__':
         else:
             pass
     #Scrape the article content and the images
-    collect_articles(factly_urls,factly_parser,args.scrape_image, factlyu_image_urls, args.sleep)
+    collect_articles(factly_urls,factly_parser,args.scrape_image, factly_image_urls, args.sleep)
     collect_articles(pesacheck_urls,pesacheck_parser,args.scrape_image, pesacheck_image_urls, args.sleep)
     collect_articles(two11org_urls,two11org_parser,args.scrape_image, two11org_image_urls, args.sleep)
     #Image processing

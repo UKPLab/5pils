@@ -11,6 +11,7 @@ import requests as rq
 import os
 import time
 import numpy as np
+from tqdm import tqdm
 import sys 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from utils import *
@@ -156,7 +157,7 @@ def collect_articles(urls,
     img_urls_unique = set()
     if 'article' not in os.listdir('dataset/'):
         os.mkdir('dataset/article/')
-    for u in range(len(urls)):
+    for u in tqdm(range(len(urls))):
         files = [f.split('.txt')[0] for f in os.listdir('dataset/article/')]
         is_new_article=True
         if  urls[u].split('/')[-1].split('?')[0]  in files:
@@ -179,12 +180,10 @@ def collect_articles(urls,
                 if image_urls!= None:
                     #A reference image url is already provided as part of the dataset
                     scrape_image(image_urls[u], path.split('/')[-1])
-                    time.sleep(3)
                 else:
                     #If no existing image urls are provided, default to the scraped ones
                     for im_url in scraped_image_urls:
                         scrape_image(im_url, path.split('/')[-1])
-                        time.sleep(3)
             time.sleep(sleep)
 
 

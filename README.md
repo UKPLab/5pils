@@ -30,7 +30,9 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 ## 5Pils dataset
 
 The 5Pils dataset consists of 1,676 fact-checked images annotated with question-answer pairs based on the 5 Pillars framework. The annotations are contained in the train.json, val.json, and test.json files of the dataset folder. 
+
 For downloading the images, please refer to the section **Usage - downloading images** or contact jonathan.tonglet@tu-darmstadt.de if you face issues.
+
 More information about the dataset can be found in the [README](https://github.com/UKPLab/5pils/tree/main/dataset) of the dataset folder.
 
 

@@ -179,7 +179,7 @@ altered-this-image-of-sex-workers-supporting-william-rutos-presidential-bid-is-d
 altered-this-image-of-state-house-kenya-containing-a-yellow-cross-is-doctored-70be22bd433b.png: Standard processing
 altered-this-image-of-swarup-mishra-with-the-book-how-to-rule-africans-is-doctored-9d44b7b3b6e7.png: Standard processing
 altered-this-image-of-the-21-july-2022-edition-of-the-standard-newspaper-is-doctored-23ef757da7bb.png: Standard processing
-altered-this-image-of-the-cover-page-of-the-reporter-newspaper-is-doctored-dc8b59da2397.png: Replaced with URL: https://miro.medium.com/v2/resize:fit:1100/format:webp/0*W6Rveq2dH9r7F8AQ; Standard processing
+altered-this-image-of-the-cover-page-of-the-reporter-newspaper-is-doctored-dc8b59da2397.png: Standard processing
 altered-this-image-of-the-front-cover-of-the-daily-mails-april-5-2021-edition-is-doctored-90863e4645f9.png: Cropped: [80, 55, 440, 546]
 altered-this-image-of-the-front-cover-of-the-economist-newspaper-is-doctored-cb261a179557.png: Standard processing
 altered-this-image-of-the-saturday-standard-november-14-2020-edition-is-doctored-f835ddd588af.png: Cropped: [70, 97, 460, 578]
@@ -894,7 +894,7 @@ false-this-photo-of-a-uganda-prisons-officer-is-not-of-fdc-president-patrick-amu
 false-this-photo-of-a-woman-giving-birth-in-the-middle-of-a-street-is-from-ghana-not-uganda-dc4a1cf21ae9.png: Cropped: [2, 105, 504, 571]
 false-this-photo-of-an-injured-journalist-is-from-2015-not-2020-d8587b201aa1.png: Cropped: [0, 122, 488, 638]
 false-this-photo-of-bobi-wine-inspecting-a-military-parade-is-doctored-d040351cdbaa.png: Cropped: [0, 100, 635, 537]
-false-this-photo-of-newborn-babies-sleeping-on-plastic-chairs-is-from-uganda-not-kenya-42e00cacdf35.png: Replaced with URL: https://miro.medium.com/v2/resize:fit:720/format:webp/1*BkvIsXCMlBrov4vx6NdbQw.png; Cropped: [20, 210, 635, 830]
+false-this-photo-of-newborn-babies-sleeping-on-plastic-chairs-is-from-uganda-not-kenya-42e00cacdf35.png: Cropped: [20, 210, 635, 830]
 false-this-photo-of-prisoners-escaping-in-broad-daylight-is-misleading-403955e040d1.png: Standard processing
 false-image-of-governor-mike-sonko-ridiculing-president-uhuru-kenyatta-is-fake-9087fc2821d8.png: Standard processing
 false-the-man-in-this-photo-is-not-kpc-managing-director-dr-macharia-irungu-afb25a550dc0.png: Standard processing
@@ -919,7 +919,7 @@ false-this-picture-is-not-of-bodies-of-amhara-victims-in-the-oromia-conflict-in-
 false-this-picture-is-not-related-to-an-attack-on-fano-troops-87ef80275ab4.png: Cropped: [0, 200, 640, 505]
 false-this-picture-of-june-ruto-was-taken-in-poland-not-at-the-un-headquarters-6f94eb77a469.png: Cropped: [0, 152, 640, 476]
 false-this-picture-of-military-deployment-was-not-taken-in-nairobi-b4a36d9ebecc.png: Standard processing
-false-this-post-claiming-to-show-ethiopians-killed-during-a-protest-uses-a-photo-from-kenya-a70bae20a784.png: Replaced with URL: https://miro.medium.com/v2/resize:fit:640/format:webp/0*mQWTF8uFris04Aeu; Standard processing
+false-this-post-claiming-to-show-ethiopians-killed-during-a-protest-uses-a-photo-from-kenya-a70bae20a784.png: Standard processing
 false-this-thumbnail-image-does-not-show-an-illegal-mine-that-collapsed-in-oromia-ethiopia-e279317a254f.png: Cropped: [0, 138, 640, 478]
 hoax-these-photos-do-not-show-protests-in-uganda-following-the-2021-general-election-bd0c3c3ae82.png: Standard processing
 hoax-these-photos-do-not-show-the-ongoing-demonstrations-in-kasarani-d1513aeac2bb.png: Cropped: [0, 146, 500, 647]

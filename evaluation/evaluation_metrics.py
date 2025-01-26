@@ -254,7 +254,7 @@ def evaluate(prediction,
         prediction_dates = extract_named_entities(prediction, NER_model,'dates_and_times')
         prediction_dates = [convert_to_date(date_str) for date_str in prediction_dates]
         prediction_dates = [d for d in prediction_dates if d is not None]
-        ground_truth_dates = [convert_to_date(date_str) for date_str in ast.literal_eval(ground_truth)]
+        ground_truth_dates = [convert_to_date(date_str) for date_str in ground_truth]
         if len(ground_truth_dates) > 0 and len(prediction_dates) > 0:
             if len(prediction_dates) > len(ground_truth_dates):
                 # Generate all combinations of size up to x

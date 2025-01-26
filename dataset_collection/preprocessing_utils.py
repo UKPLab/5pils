@@ -244,7 +244,7 @@ def normalize_json_fields(json_data, spacy_model):
     #Get date
     #Get numeric label
     normalized_json_data['date'] = json_data['real date']
-    normalized_json_data['date numeric label'] = str(get_numeric_date_label(normalized_json_data['date'],spacy_model))
+    normalized_json_data['date numeric label'] = get_numeric_date_label(normalized_json_data['date'],spacy_model)
     normalized_json_data['date'] = normalized_json_data['date'] if normalized_json_data['date numeric label']!='not enough information' else 'not enough information'
     #Get location
     normalized_json_data['location'] = json_data['real location']
@@ -253,8 +253,8 @@ def normalize_json_fields(json_data, spacy_model):
     #Get Type of image
     normalized_json_data['type of image'] = image_type_normalization(json_data).lower()
     #Get Verification strategy and tool
-    normalized_json_data['verification strategy'] = str(verification_strategy_normalization(json_data))
-    normalized_json_data['verification tool'] = str(verification_tool_normalization(json_data))
+    normalized_json_data['verification strategy'] = verification_strategy_normalization(json_data)
+    normalized_json_data['verification tool'] = verification_tool_normalization(json_data)
     #Normalize fields that are NEI
     for field in ['source', 'location', 'motivation']: 
         nei_str = ['not specified', 'not defined', 'not enough information', 'unknown',

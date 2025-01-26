@@ -43,6 +43,7 @@ if __name__=='__main__':
     normalized_data = normalized_data.drop(normalized_data.index[null_rows])
     #Temporal ordering
     normalized_data = normalized_data.sort_values(by='publication date')
+    #Fill missing information and convert to list of dictionaries
     normalized_data = normalized_data.fillna('not enough information').to_dict(orient='records')
     #Get GeoNames entries for all ground truth locations
     all_locs = []

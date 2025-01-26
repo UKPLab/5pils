@@ -9,8 +9,6 @@ Contact person: [Jonathan Tonglet](mailto:jonathan.tonglet@tu-darmstadt.de)
 
 [UKP Lab](https://www.ukp.tu-darmstadt.de/) | [TU Darmstadt](https://www.tu-darmstadt.de/)
 
-The dataset is also available on [TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/4317).
-
 Don't hesitate to send us an e-mail or report an issue, if something is broken (and it shouldn't be) or if you have further questions. 
 
 ## News 📢
@@ -58,12 +56,12 @@ the graphic nature of some images, we do not release them directly. Instead, we 
         "was the photo used before?": "yes",
         "source": "US Airforce's official website",
         "date": "2013",
-        "date numeric label": "['2013-01-14T00:00:00+00:00']",
+        "date numeric label": ["2013-01-14T00:00:00+00:00"],
         "location": "Tacloban city, Philippines",
         "motivation": "To document the US Airforce\u2019s operation Damayan evacuation in 2013",
         "type of image": "out-of-context",
-        "verification strategy": "['reverse image search']",
-        "verification tool": "['Other/Unspecified']",
+        "verification strategy": ["reverse image search"],
+        "verification tool": ["Other/Unspecified"],
         "claimed location": "Kabul, Afghanistan",
         "claimed date": "2021",
         "image URL": "https://factly.in/wp-content/uploads//2021/08/IAF-Airlift-Afghanistan-FB-Post.jpg"
@@ -94,7 +92,7 @@ $ python scripts/build_dataset_from_url.py
 ## Usage - evaluation
 
 Evaluate the performance of a model on 5Pils for a specific pillar. In this example, we evaluate Date.
-The results need to be contained in a list of dictionaries, where each dictionary contains an 'output' and a 'ground_truth' kzy. 'output' should be a string.
+The results need to be contained in a list of dictionaries, where each dictionary contains an 'output' and a 'ground_truth' key. 'output' should be a string.
 
 ```
 $ python scripts/evaluate_answer_generation.py --results_file output/results_date.json --task date

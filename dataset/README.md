@@ -11,8 +11,6 @@ $ python -m spacy download en_core_web_lg
 $ python scripts/build_dataset_from_url.py
 ```
 
-The dataset is also available on [TUdatalib](https://tudatalib.ulb.tu-darmstadt.de/handle/tudatalib/4317).
-
 Each record contains the following items: 
 
 **Main items**
@@ -52,12 +50,12 @@ The following items are provided as metadata for analysis purpose
         "was the photo used before?": "yes",
         "source": "US Airforce's official website",
         "date": "2013",
-        "date numeric label": "['2013-01-14T00:00:00+00:00']",
+        "date numeric label": ["2013-01-14T00:00:00+00:00"],
         "location": "Tacloban city, Philippines",
         "motivation": "To document the US Airforce\u2019s operation Damayan evacuation in 2013",
         "type of image": "out-of-context",
-        "verification strategy": "['reverse image search']",
-        "verification tool": "['Other/Unspecified']",
+        "verification strategy": ["reverse image search"],
+        "verification tool": ["Other/Unspecified"],
         "claimed location": "Kabul, Afghanistan",
         "claimed date": "2021",
         "image URL": "https://factly.in/wp-content/uploads//2021/08/IAF-Airlift-Afghanistan-FB-Post.jpg"

@@ -369,11 +369,11 @@ def get_ndcg_score(dataset, task, evidence, image_embeddings, clip_evidence_embe
     '''
     total_ndcg = 0
     count = 0
-    img_corpus = [image['image path'] for image in dataset]
+    img_corpus = [image['image_path'] for image in dataset]
     ground_truth = [image[task] for image in dataset]
     for i in range(len(img_corpus)):
-        evidence_subset = [ev for ev in evidence if ev['image path']==img_corpus[i]]
-        evidence_subset_index = [evidence.index(ev) for ev in evidence if ev['image path']==img_corpus[i]]
+        evidence_subset = [ev for ev in evidence if ev['image_path']==img_corpus[i]]
+        evidence_subset_index = [evidence.index(ev) for ev in evidence if ev['image_path']==img_corpus[i]]
         if len(evidence_subset)>3:
             #Retrieve the index of the image in the embedding matrix
             image_index = int(image_embeddings_map[img_corpus[i]])

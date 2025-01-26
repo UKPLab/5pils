@@ -59,8 +59,8 @@ def get_topk_evidence(image_path,
     '''
     Given an image, get the topk evidence using CLIP similarity.
     '''
-    evidence = [ev for ev in evidence if ev['image path']==image_path]
-    evidence_index = [evidence.index(ev) for ev in evidence if ev['image path']==image_path]
+    evidence = [ev for ev in evidence if ev['image_path']==image_path]
+    evidence_index = [evidence.index(ev) for ev in evidence if ev['image_path']==image_path]
     if len(evidence_index)>k:
         image_index = int(image_map[image_path])
         sorted_evidence = sort_with_clip_score(image_index,
@@ -86,7 +86,7 @@ def get_topk_demonstrations(image_path,
     #Only take train images that have a label for the corresponding task
     subset_train_index = [t for t in range(len(train)) if train[t][question].lower()!='not enough information']
     subset_train = [train[t] for t in range(len(train)) if t in subset_train_index]
-    for idx, i in  zip(subset_train_index,[t['image path'] for t in subset_train]):
+    for idx, i in  zip(subset_train_index,[t['image_path'] for t in subset_train]):
         try:
             train_image_idx.append((idx,int(image_map[i]))) #The candidate demonstrations index in the embedding matrix
         except:
@@ -104,7 +104,7 @@ def get_evidence_prompt(evidence):
     for ev in range(len(evidence)):
         text = 'Evidence %s\n'%ev
         if 'evidence url' in evidence[ev].keys():
-            text += 'URL: %s\n'%evidence[ev]['evidence url']
+            text += 'URL: %s\n'%evidence[ev]['evidence_url']
         if 'hostname' in evidence[ev].keys():
             text += 'Hostname: %s\n'%evidence[ev]['hostname']
         if 'sitename'in evidence[ev].keys():
@@ -118,8 +118,8 @@ def get_evidence_prompt(evidence):
         if 'description' in evidence[ev].keys():
             text += '%s\n'%evidence[ev]['description']
 
-        if 'Caption not found' not in evidence[ev]['image caption'] and 'Image not found' not in evidence[ev]['image caption']:
-            text += 'Image captions: %s\n' % evidence[ev]['image caption']
+        if 'Caption not found' not in evidence[ev]['image_caption'] and 'Image not found' not in evidence[ev]['image_caption']:
+            text += 'Image captions: %s\n' % evidence[ev]['image_caption']
 
         text += '\n'
         prompt += text
@@ -148,8 +148,8 @@ def get_tokenized_evidence(evidence, tokenizer):
     for s in tqdm(range(len(evidence))):
       text = ''
       text += evidence[s]['title']
-      if 'Caption not found' not in evidence[s]['image caption'] and 'Image not found' not in evidence[s]['image caption']:
-          text += evidence[s]['image caption']
+      if 'Caption not found' not in evidence[s]['image_caption'] and 'Image not found' not in evidence[s]['image_caption']:
+          text += evidence[s]['image_caption']
       if text=='':
         text += evidence[s]['description']
       text = truncate_text(text,tokenizer)

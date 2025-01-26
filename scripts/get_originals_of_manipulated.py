@@ -23,12 +23,12 @@ if __name__=='__main__':
     test = load_json('dataset/test.json')
     evidence = load_json('dataset/retrieval_results/evidence.json')
 
-    manipulation_detection_test_image_paths = [im['image path'] for im in load_json(args.json_path) if im['manipulation detection']=='manipulated']
+    manipulation_detection_test_image_paths = [im['image_path'] for im in load_json(args.json_path) if im['manipulation_detection']=='manipulated']
     if args.download_image:
         #Load data
-        subset_evidence = [ev['image url']  for ev in evidence if ev['image path'] in manipulation_detection_test_image_paths]
+        subset_evidence = [ev['image_url']  for ev in evidence if ev['image_path'] in manipulation_detection_test_image_paths]
         subset_evidence = [url if url else '' for url in subset_evidence]
-        evidence_index = [evidence.index(ev) for ev in evidence if ev['image path'] in manipulation_detection_test_image_paths]
+        evidence_index = [evidence.index(ev) for ev in evidence if ev['image_path'] in manipulation_detection_test_image_paths]
         image_to_download = [u.split(';')[0] for u in subset_evidence] #Take for each evidence the first version of the image
         for i in range(len(subset_evidence)):
             download_image(image_to_download[i],'dataset/manipulated_original_img/'+str(evidence_index[i]))
@@ -36,8 +36,8 @@ if __name__=='__main__':
     #Identify originals with publication date heuristic
     dict_original_image = {}
     for img_path in manipulation_detection_test_image_paths:
-        subset = [ev for ev in evidence if ev['image path'] == img_path]
-        subset_index = [evidence.index(ev) for ev in evidence if ev['image path'] == img_path]
+        subset = [ev for ev in evidence if ev['image_path'] == img_path]
+        subset_index = [evidence.index(ev) for ev in evidence if ev['image_path'] == img_path]
         if len(subset) > 0:
             sorted_evidence_by_date_index = pd.DataFrame(subset).sort_values(by='date').index.to_list()
             if len(sorted_evidence_by_date_index) != 0:

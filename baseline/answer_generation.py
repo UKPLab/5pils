@@ -76,7 +76,7 @@ def run_model(image_paths,
         if modality in ['evidence','multimodal']:
             if len(evidence_idx[i])!=0:
                 #Take the subset of evidence matching the image, then take the top K based on CLIP ranking
-                evidence_image_subset = [ev for ev in evidence if ev['image path']==image_paths[i]]
+                evidence_image_subset = [ev for ev in evidence if ev['image_path']==image_paths[i]]
                 evidence_selection = [evidence_image_subset[idx] for idx in evidence_idx[i]]
                 if len(demonstrations[i])!=0:
                     prompt = assembler(question, evidence=evidence_selection,

@@ -20,7 +20,7 @@ if __name__=='__main__':
     val = load_json('dataset/val.json')
     test = load_json('dataset/test.json')
     urls = [t['URL'] for t in train] + [t['URL'] for t in val] + [t['URL'] for t in test]
-    image_urls = [t['image URL'] for t in train] + [t['image URL'] for t in val] + [t['image URL'] for t in test]
+    image_urls = [t['image_URL'] for t in train] + [t['image_URL'] for t in val] + [t['image_URL'] for t in test]
     #Group the URL by FC organization, as each organization uses a different parser
     factly_urls, factly_image_urls =  [], []
     pesacheck_urls, pesacheck_image_urls =  [], []

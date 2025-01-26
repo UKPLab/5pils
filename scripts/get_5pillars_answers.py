@@ -53,9 +53,9 @@ if __name__=='__main__':
     #Load test images
     test = load_json('dataset/test.json')
     task_test = [t for t in test if t[args.task]!='not enough information']
-    image_paths = [t['image path'] for t in task_test]
+    image_paths = [t['image_path'] for t in task_test]
     if args.task=='date':
-        ground_truth = [t['date numeric label'] for t in task_test]
+        ground_truth = [t['date_numeric_label'] for t in task_test]
     else:
         ground_truth = [t[args.task] for t in task_test]
 
@@ -71,8 +71,8 @@ if __name__=='__main__':
             evidence_idx.append(get_topk_evidence(image_paths[i], evidence, image_embeddings, clip_evidence_embeddings, image_embeddings_map))
     #Select demonstrations
     #Keep train images that have evidence
-    images_with_evidence = [ev['image path'] for ev in evidence]
-    demonstration_candidates = [t for t in train if t['image path'] in images_with_evidence]
+    images_with_evidence = [ev['image_path'] for ev in evidence]
+    demonstration_candidates = [t for t in train if t['image_path'] in images_with_evidence]
     demonstrations = []
     for i in range(len(image_paths)):
         if args.n_shots > 0:
@@ -82,10 +82,10 @@ if __name__=='__main__':
             instance_demonstrations = []
             for idx in demonstrations_idx:
                 #Get the top k evidence for each demonstration
-                demo_image = demonstration_candidates[idx]['image path']
+                demo_image = demonstration_candidates[idx]['image_path']
                 demo_answer = demonstration_candidates[idx][args.task]
                 demo_evidence_idx = get_topk_evidence(demo_image,evidence,image_embeddings, clip_evidence_embeddings, image_embeddings_map)
-                evidence_image_subset = [ev for ev in evidence if ev['image path']==demo_image]
+                evidence_image_subset = [ev for ev in evidence if ev['image_path']==demo_image]
                 demo_evidence = [evidence_image_subset[idx] for idx in demo_evidence_idx]
                 instance_demonstrations.append((demo_image, demo_answer, demo_evidence))
             demonstrations.append(instance_demonstrations)

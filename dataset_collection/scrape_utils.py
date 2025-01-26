@@ -265,16 +265,16 @@ def get_filtered_retrieval_results(path):
             #Loop through all evidence urls, and see if they meet the requirements
             evidence_url = ris_results[i]['urls'][u]
             ris_data = {
-                'image path': ris_results[i]['image path'], 
-                'raw url': evidence_url,
-                'image urls': ris_results[i]['image urls'][evidence_url], 
+                'image_path': ris_results[i]['image_path'], 
+                'raw_url': evidence_url,
+                'image_urls': ris_results[i]['image_urls'][evidence_url], 
                 'is_fc': is_fc_organization('/'.join(evidence_url.split('/')[:3])),
                 'is_https': evidence_url.startswith('https')
             }
             # Apply additional conditions to each dictionary
-            ris_data['is_banned'] = is_banned(ris_data['raw url'])
-            ris_data['is_obfuscated'] = is_obfuscated_or_encoded(ris_data['raw url'])  
-            ris_data['is_html'] = is_likely_html(ris_data['raw url'])
+            ris_data['is_banned'] = is_banned(ris_data['raw_url'])
+            ris_data['is_obfuscated'] = is_obfuscated_or_encoded(ris_data['raw_url'])  
+            ris_data['is_html'] = is_likely_html(ris_data['raw_url'])
             # Selection condition
             ris_data['selection'] = ris_data['is_html'] and ris_data['is_https'] and not ris_data['is_obfuscated'] and not ris_data['is_banned']
             # Append the dictionary to the list if it meets all the criteria
@@ -338,14 +338,14 @@ def extract_info_trafilatura(page_url,image_url):
                             'hostname','description','sitename',
                             'date','text','language','image','pagetype']
             result = {key: result[key] for key in keys_to_keep if key in result}
-            result['image url'] = image_url
+            result['image_url'] = image_url
             # Finding the image caption
             image_caption = []
             soup = bs(response.text, 'html.parser')
             for img in image_url:
                 image_caption.append(find_image_caption(soup, img))
             image_caption.append(find_image_caption(soup,result['image']))
-            result['image caption'] = image_caption
+            result['image_caption'] = image_caption
             result['url'] = page_url
             return result
         else:
@@ -378,23 +378,23 @@ def merge_data(evidence, evidence_metadata,dataset, apply_filtering=False):
     evidence_df = pd.DataFrame(evidence)
     evidence_metadata_df = pd.DataFrame(evidence_metadata)
     dataset_df = pd.DataFrame(dataset)
-    merged_data = pd.merge(evidence_df, evidence_metadata_df.drop_duplicates(subset='raw url')[['image path','raw url']].rename(columns={'raw url':'url'}), on='url',how='inner')
-    merged_data = pd.merge(merged_data.rename(columns={'url':'evidence url'}), 
-                           dataset_df[['org','image path','publication date']].rename(columns={'publication date': 'date_filter'}), 
-                           on='image path',how='inner')
-    merged_data  = merged_data.dropna(subset='evidence url')
+    merged_data = pd.merge(evidence_df, evidence_metadata_df.drop_duplicates(subset='raw_url')[['image_path','raw_url']].rename(columns={'raw _rl':'url'}), on='url',how='inner')
+    merged_data = pd.merge(merged_data.rename(columns={'url':'evidence_url'}), 
+                           dataset_df[['org','image_path','publication_date']].rename(columns={'publication_date': 'date_filter'}), 
+                           on='image_path',how='inner')
+    merged_data  = merged_data.dropna(subset='evidence_url')
     #Apply optional filtering steps
     if apply_filtering:
         #Verify that the evidence is not the FC article itself.
-        fc_mask = merged_data.apply(lambda row : False if row['org'] in row['evidence url'] or row['org'] in ''.join(row['image url']) else True, axis=1)
+        fc_mask = merged_data.apply(lambda row : False if row['org'] in row['evidence_url'] or row['org'] in ''.join(row['image_url']) else True, axis=1)
         merged_data = merged_data[fc_mask]
         #Remove evidence that have been published after the FC article or have no publication date
         merged_data = merged_data[~merged_data['date'].isnull()]
         time_mask = merged_data.apply(lambda row : True if time_difference(row['date'],row['date_filter']) else False,axis=1)
         merged_data = merged_data[time_mask]   
-    merged_data = merged_data[['image path','org','evidence url','title','author','hostname',
-                           'description','sitename','date','image','image url','image caption']]
-    merged_data = merged_data.drop_duplicates(subset=['evidence url','image path'])
+    merged_data = merged_data[['image_path','org','evidence_url','title','author','hostname',
+                           'description','sitename','date','image','image_url','image_caption']]
+    merged_data = merged_data.drop_duplicates(subset=['evidence_url','image_path'])
     return merged_data
 
 

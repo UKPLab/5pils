@@ -11,13 +11,6 @@ sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from utils import *
 
 
-def load_image(row):
-    '''
-    Open image from file
-    '''
-    image = Image.open(row['image_file_path']).convert('RGB')
-    return {'image': image}
-
 def compute_metrics(p):
     return metric.compute(predictions=np.argmax(p.predictions, axis=1), references=p.label_ids)
 
@@ -112,17 +105,17 @@ if __name__=='__main__':
     test = load_json('dataset/test.json')
 
     #Update image path
-    train_input = [im['image path'] for im in train]
-    val_input = [im['image path'] for im in val]
-    test_input = [im['image path'] for im in test]
+    train_input = [im['image_path'] for im in train]
+    val_input = [im['image_path'] for im in val]
+    test_input = [im['image_path'] for im in test]
     #change type of image label
-    train_target = ['manipulated' if im['type of image']=='manipulated' else 'non-manipulated' for im in train]
-    val_target = ['manipulated' if im['type of image']=='manipulated' else 'non-manipulated' for im in val]
-    test_target = ['manipulated' if im['type of image']=='manipulated' else 'non-manipulated' for im in test]
+    train_target = ['manipulated' if im['type_of_image']=='manipulated' else 'non-manipulated' for im in train]
+    val_target = ['manipulated' if im['type_of_image']=='manipulated' else 'non-manipulated' for im in val]
+    test_target = ['manipulated' if im['type_of_image']=='manipulated' else 'non-manipulated' for im in test]
     #Convert to HF dataset
-    train_dataset = Dataset.from_dict({'image path': train_input,'labels': train_target})
-    val_dataset = Dataset.from_dict({'image path': val_input,'labels': val_target})
-    test_dataset = Dataset.from_dict({'image path': test_input,'labels': test_target})
+    train_dataset = Dataset.from_dict({'image_path': train_input,'labels': train_target})
+    val_dataset = Dataset.from_dict({'image_path': val_input,'labels': val_target})
+    test_dataset = Dataset.from_dict({'image_path': test_input,'labels': test_target})
 
 
     # Preprocessing
@@ -157,5 +150,5 @@ if __name__=='__main__':
             preds = torch.argmax(outputs.logits, dim=1)
             test_predictions.extend(preds.tolist())
     test_predictions = ['non-manipulated' if p==0 else 'manipulated' for p in test_predictions]
-    results = [{'image path':test[im]['image path'], 'manipulation detection':test_predictions[im]} for im in range(len(test))]
+    results = [{'image_path':test[im]['image_path'], 'manipulation_detection':test_predictions[im]} for im in range(len(test))]
     save_result(results,args.json_path)

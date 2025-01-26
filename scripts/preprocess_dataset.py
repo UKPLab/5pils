@@ -32,17 +32,17 @@ if __name__=='__main__':
     #Preprocess the data
     normalized_data = pd.DataFrame([normalize_json_fields(d , nlp) for d in raw_data])
     #Remove duplicate images
-    duplicates = get_duplicates(normalized_data['image path'].to_list())
-    duplicates_mask = normalized_data['image path'].apply(lambda row : False if row in duplicates else True)
+    duplicates = get_duplicates(normalized_data['image_path'].to_list())
+    duplicates_mask = normalized_data['image_path'].apply(lambda row : False if row in duplicates else True)
     normalized_data = normalized_data[duplicates_mask]
     #Remove images with no labeled pillars
-    annotation_count = normalized_data[['was the photo used before?','source','location', 'date', 'motivation']]
+    annotation_count = normalized_data[['provenance','source','location', 'date', 'motivation']]
     for c in annotation_count.columns:
         annotation_count[c] = annotation_count[c].apply(lambda row : row if str(row).lower() != 'not enough information' else None)
     null_rows = annotation_count.isnull().all(axis=1)
     normalized_data = normalized_data.drop(normalized_data.index[null_rows])
     #Temporal ordering
-    normalized_data = normalized_data.sort_values(by='publication date')
+    normalized_data = normalized_data.sort_values(by='publication_date')
     #Fill missing information and convert to list of dictionaries
     normalized_data = normalized_data.fillna('not enough information').to_dict(orient='records')
     #Get GeoNames entries for all ground truth locations

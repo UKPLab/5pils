@@ -222,30 +222,30 @@ def normalize_json_fields(json_data, spacy_model):
     #Get the URL
     normalized_json_data['URL'] = json_data['URL']
     #Get image path in local files
-    normalized_json_data['image path'] = get_image_path(json_data)
+    normalized_json_data['image_path'] = get_image_path(json_data)
     #Get organization
     normalized_json_data['org'] = get_organization(json_data)
     #Get publication date
-    normalized_json_data['publication date'] = json_data['publication date']
+    normalized_json_data['publication_date'] = json_data['publication date']
     #Get claim text 
     normalized_json_data['claim'] = normalize_claim(json_data['claim'])
     #Get provenance
     if 'yes' in str(json_data['was the photo used before?']).lower() or 'true' in str(json_data['was the photo used before?']).lower():
-        normalized_json_data['was the photo used before?'] = 'yes'
+        normalized_json_data['provenance'] = 'yes'
     elif 'not enough' in str(json_data['was the photo used before?']).lower():
-        normalized_json_data['was the photo used before?'] = 'not enough information'
+        normalized_json_data['provenance'] = 'not enough information'
     elif 'no' == str(json_data['was the photo used before?']).lower()[:2]:
-        normalized_json_data['was the photo used before?']  = 'no'
+        normalized_json_data['provenance']  = 'no'
     else:
-        normalized_json_data['was the photo used before?'] = 'not enough information'
+        normalized_json_data['provenance'] = 'not enough information'
     #Get source
     #Remove unclear sources
     normalized_json_data['source'] = remove_vague_sources(json_data['source'])
     #Get date
     #Get numeric label
     normalized_json_data['date'] = json_data['real date']
-    normalized_json_data['date numeric label'] = get_numeric_date_label(normalized_json_data['date'],spacy_model)
-    normalized_json_data['date'] = normalized_json_data['date'] if normalized_json_data['date numeric label']!='not enough information' else 'not enough information'
+    normalized_json_data['date_numeric_label'] = get_numeric_date_label(normalized_json_data['date'],spacy_model)
+    normalized_json_data['date'] = normalized_json_data['date'] if normalized_json_data['date_numeric_label']!='not enough information' else 'not enough information'
     #Get location
     normalized_json_data['location'] = json_data['real location']
     #Get motivation
@@ -253,8 +253,8 @@ def normalize_json_fields(json_data, spacy_model):
     #Get Type of image
     normalized_json_data['type of image'] = image_type_normalization(json_data).lower()
     #Get Verification strategy and tool
-    normalized_json_data['verification strategy'] = verification_strategy_normalization(json_data)
-    normalized_json_data['verification tool'] = verification_tool_normalization(json_data)
+    normalized_json_data['verification_strategy'] = verification_strategy_normalization(json_data)
+    normalized_json_data['verification_tool'] = verification_tool_normalization(json_data)
     #Normalize fields that are NEI
     for field in ['source', 'location', 'motivation']: 
         nei_str = ['not specified', 'not defined', 'not enough information', 'unknown',

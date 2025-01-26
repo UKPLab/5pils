@@ -100,10 +100,10 @@ if __name__=='__main__':
         raw_ris_results = []
         for path in tqdm(os.listdir(args.image_path)):
             urls, image_urls, vis_entities  = detect_web(args.image_path +path, args.max_results)
-            raw_ris_results.append({'image path':args.image_path + path, 
+            raw_ris_results.append({'image_path':args.image_path + path, 
                                     'urls': urls, 
-                                    'image urls': image_urls,  
-                                    'visual entities': vis_entities
+                                    'image_urls': image_urls,  
+                                    'visual_entities': vis_entities
                                     }
             )
             time.sleep(args.sleep)
@@ -118,8 +118,8 @@ if __name__=='__main__':
         #Further ensure that there is a corresponding image already downloaded
         selected_data = [d for d in load_json(args.evidence_urls) if d['image path'].split('/')[-1] in os.listdir('dataset/processed_img/')]
         
-    urls = [d['raw url'] for d in selected_data]
-    images = [d['image urls'] for d in selected_data]
+    urls = [d['raw_url'] for d in selected_data]
+    images = [d['image_urls'] for d in selected_data]
 
     if args.scrape_with_trafilatura:
         #Collect results with Trafilatura

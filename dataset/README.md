@@ -19,7 +19,7 @@ Each record contains the following items:
 - `image URL`: URL leading to the fact-checked image
 - `image path` : local path to the image
 - `publication date` : publication date of the fact-checking article
-- `was the photo used before?` : answer to the Provenance pillar
+- `provenance` : answer to the Provenance pillar
 - `source` : answer to the Source pillar
 - `date` : answer to the Date pillar
 - `date numeric label` : answer to the Date pillar in numeric format
@@ -43,22 +43,22 @@ The following items are provided as metadata for analysis purpose
 ````json
     {
         "URL": "https://factly.in/2013-evacuation-image-from-typhoon-hit-philippines-is-passed-off-as-iaf-airlifting-800-people-from-kabul",
-        "image path": "dataset/processed_img/2013-evacuation-image-from-typhoon-hit-philippines-is-passed-off-as-iaf-airlifting-800-people-from-kabul.png",
+        "image_path": "dataset/processed_img/2013-evacuation-image-from-typhoon-hit-philippines-is-passed-off-as-iaf-airlifting-800-people-from-kabul.png",
         "org": "factly",
-        "publication date": "2021-08-17T12:00:55+00:00",
+        "publication_date": "2021-08-17T12:00:55+00:00",
         "claim": "The image shows 800 people airlifted by the Indian Air Force from Kabul.",
-        "was the photo used before?": "yes",
+        "provenance": "yes",
         "source": "US Airforce's official website",
         "date": "2013",
-        "date numeric label": ["2013-01-14T00:00:00+00:00"],
+        "date_numeric_label": ["2013-01-14T00:00:00+00:00"],
         "location": "Tacloban city, Philippines",
         "motivation": "To document the US Airforce\u2019s operation Damayan evacuation in 2013",
-        "type of image": "out-of-context",
-        "verification strategy": ["reverse image search"],
-        "verification tool": ["Other/Unspecified"],
-        "claimed location": "Kabul, Afghanistan",
-        "claimed date": "2021",
-        "image URL": "https://factly.in/wp-content/uploads//2021/08/IAF-Airlift-Afghanistan-FB-Post.jpg"
+        "type_of_image": "out-of-context",
+        "verification_strategy": ["reverse image search"],
+        "verification_tool": ["Other/Unspecified"],
+        "claimed_location": "Kabul, Afghanistan",
+        "claimed_date": "2021",
+        "image_URL": "https://factly.in/wp-content/uploads//2021/08/IAF-Airlift-Afghanistan-FB-Post.jpg"
     }
 
 ````

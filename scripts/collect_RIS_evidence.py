@@ -10,51 +10,64 @@ import argparse
 
 
 
-def detect_web(path,how_many_queries=30):
+def detect_web(image_path, 
+               api_key,
+               how_many_queries=30):
     """
     Detects web annotations given an image.
     """
-    client = vision.ImageAnnotatorClient()
-
-    with open(path, "rb") as image_file:
-        content = image_file.read()
-
-    image = vision.Image(content=content)
-
-    response = client.web_detection(image=image, max_results=how_many_queries)
-    annotations = response.web_detection
-
+    api_url = 'https://vision.googleapis.com/v1/images:annotate?key=' + api_key
+    with open(image_path, 'rb') as image_file:
+        image_data = base64.b64encode(image_file.read()).decode('utf-8')
+        payload = {
+            "requests": [
+                {
+                    "image": {
+                        "content": image_data
+                    },
+                    "features": [
+                        {
+                            "type": "WEB_DETECTION",
+                            "maxResults": how_many_queries
+                        }
+                    ]
+                }
+            ]
+        }
+    response = requests.post(api_url, json=payload)
+    annotations = response.json()['responses'][0]['webDetection']
     page_urls = []
     matching_image_urls = {}
     visual_entities = {}
 
-    if annotations.pages_with_matching_images:
+    if 'pagesWithMatchingImages' in annotations.keys():
         print(
             "\n{} Pages with matching images found:".format(
-                len(annotations.pages_with_matching_images)
+                len(annotations['pagesWithMatchingImages'])
             )
         )
         
-        for page in annotations.pages_with_matching_images:
-            page_urls.append(page.url)
-            if page.full_matching_images:
+        for page in annotations['pagesWithMatchingImages']:
+            page_urls.append(page['url'])
+            if 'fullMatchingImages' in  page.keys():
                 #List of image URLs for that webpage (the image can appear more than once)
-                matching_image_urls[page.url] = [image.url for image in page.full_matching_images]
+                matching_image_urls[page['url']] = [image['url'] for image in page['fullMatchingImages']]
             else:
-                matching_image_urls[page.url] = []
-            if page.partial_matching_images: 
-                matching_image_urls[page.url] += [image.url for image in page.partial_matching_images] 
+                matching_image_urls[page['url']] = []
+            if 'partialMatchingImages' in  page.keys(): 
+                matching_image_urls[page['url']] += [image['url'] for image in page['partialMatchingImages']] 
     else:
         print('No matching images found for ' + path)
-    if annotations.web_entities:
-        for entity in annotations.web_entities:
+    if 'webEntities' in annotations.keys():
+        for entity in annotations['webEntities']:
             #Collect web entities as entity-score dictionary pairs
-            visual_entities[entity.description] = entity.score
+            if 'description' in entity.keys():
+                visual_entities[entity['description']] = entity['score']
 
-    if response.error.message:
+    if 'error' in annotations.keys():
         raise Exception(
             "{}\nFor more info on error messages, check: "
-            "https://cloud.google.com/apis/design/errors".format(response.error.message)
+            "https://cloud.google.com/apis/design/errors".format(response['error']['message'])
         )
     
     return page_urls, matching_image_urls, visual_entities
@@ -99,7 +112,10 @@ if __name__=='__main__':
         #Change the output file
         raw_ris_results = []
         for path in tqdm(os.listdir(args.image_path)):
-            urls, image_urls, vis_entities  = detect_web(args.image_path +path, args.max_results)
+            urls, image_urls, vis_entities  = detect_web(args.image_path +path, 
+                                                         key, 
+                                                         args.max_results)
+            
             raw_ris_results.append({'image_path':args.image_path + path, 
                                     'urls': urls, 
                                     'image_urls': image_urls,  

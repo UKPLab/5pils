@@ -22,4 +22,4 @@ spacy==3.7.2
 torch==2.2.0
 tqdm==4.66.3
 trafilatura==1.6.3
-transformers==4.38.0
+transformers==4.48.0

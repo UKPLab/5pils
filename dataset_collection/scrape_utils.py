@@ -378,7 +378,7 @@ def merge_data(evidence, evidence_metadata,dataset, apply_filtering=False):
     evidence_df = pd.DataFrame(evidence)
     evidence_metadata_df = pd.DataFrame(evidence_metadata)
     dataset_df = pd.DataFrame(dataset)
-    merged_data = pd.merge(evidence_df, evidence_metadata_df.drop_duplicates(subset='raw_url')[['image_path','raw_url']].rename(columns={'raw _rl':'url'}), on='url',how='inner')
+    merged_data = pd.merge(evidence_df, evidence_metadata_df.drop_duplicates(subset='raw_url')[['image_path','raw_url']].rename(columns={'raw_url':'url'}), on='url',how='inner')
     merged_data = pd.merge(merged_data.rename(columns={'url':'evidence_url'}), 
                            dataset_df[['org','image_path','publication_date']].rename(columns={'publication_date': 'date_filter'}), 
                            on='image_path',how='inner')

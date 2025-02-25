@@ -14,7 +14,7 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 ## News 📢
 
 - Check out [HintsOfTruth](https://arxiv.org/abs/2502.11753), a multimodal checkworthiness detection dataset building on 5Pils 🕵️ 
-- We release [5Pils-OOC](https://github.com/UKPLab/naacl2025-cove/tree/main/data/5pils_ooc) a subset of 5Pils containing 624 paired with accurate and out-of-context captions
+- We release [5Pils-OOC](https://github.com/UKPLab/naacl2025-cove/tree/main/data/5pils_ooc) for veracity prediction, a subset of 5Pils containing 624 images paired with accurate and out-of-context captions
 - Our follow-up work [COVE](https://arxiv.org/abs/2502.01194) is accepted to NAACL 2025 Main conference 🌵
 - Iryna Gurevych presented 5Pils during the opening keynote of [ECAI](https://www.ecai2024.eu/programme/keynotes) 2024
 - Our paper is accepted to EMNLP 2024 Main Conference! See you in Miami 🏖️

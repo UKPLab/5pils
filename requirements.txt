@@ -19,7 +19,7 @@ rouge-score==0.1.2
 scikit-learn==1.5.0
 scipy==1.11.4
 spacy==3.7.2
-torch==2.6.0
+torch==2.5.2
 tqdm==4.66.3
 trafilatura==1.6.3
 transformers==4.48.0

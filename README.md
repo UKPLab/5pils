@@ -13,6 +13,7 @@ Don't hesitate to send us an e-mail or report an issue, if something is broken (
 
 ## News 📢
 
+- We release [M4FC](https://github.com/UKPLab/M4FC), a multimodal, multilingual, multicultural, and multitask fact-checking dataset. Check it out🔍 
 - Check out [HintsOfTruth](https://arxiv.org/abs/2502.11753), a multimodal checkworthiness detection dataset building on 5Pils 🕵️ 
 - We release [5Pils-OOC](https://github.com/UKPLab/naacl2025-cove/tree/main/data/5pils_ooc), a dataset for out-of-context detection, with 624 images from 5Pils. Check it out🔍
 - Our follow-up work [COVE](https://arxiv.org/abs/2502.01194) is accepted to NAACL 2025 Main conference 🌵
@@ -182,6 +183,7 @@ If you use the 5Pils dataset or this code in your work, please cite our paper as
 ## Disclaimer
 
 > This repository contains experimental software and is published for the sole purpose of giving additional background details on the respective publication.
+
 
 
 
